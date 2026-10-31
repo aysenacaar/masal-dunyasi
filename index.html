@@ -1,0 +1,3220 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masal Dünyası | Bir Varmış Bir Yokmuş</title>
+
+    <style>
+        /* GENEL TASARIM */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #51405F;
+            background: linear-gradient(
+                180deg,
+                #FFF8EF 0%,
+                #FCE9F1 45%,
+                #F0E9FA 100%
+            );
+        }
+
+        /* ÜST MENÜ */
+        nav {
+            background: rgba(255, 250, 245, 0.95);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #EED9D5;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #655079;
+        }
+
+        .menu {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .menu a {
+            color: #655079;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            color: #E77D9D;
+        }
+
+        /* MASALSI BAŞLIK ALANI */
+        header {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 85px 20px 95px;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    #FFE5D7 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    #E5DDF9 0%,
+                    transparent 38%
+                ),
+                linear-gradient(
+                    135deg,
+                    #FFF4E8,
+                    #F9E3ED,
+                    #EDE5FA
+                );
+        }
+
+        .ustYazi {
+            color: #B77E91;
+            letter-spacing: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(46px, 8vw, 86px);
+            font-weight: normal;
+            color: #49375E;
+            margin: 18px 0;
+            text-shadow: 2px 3px 0 #FFFFFF;
+        }
+
+        .slogan {
+            font-size: 21px;
+            color: #806985;
+            font-style: italic;
+        }
+
+        .yildizlar {
+            font-size: 25px;
+            color: #C99C63;
+            letter-spacing: 16px;
+            margin-top: 30px;
+        }
+
+        .solSus {
+            position: absolute;
+            left: 6%;
+            bottom: 25px;
+            font-size: 85px;
+            opacity: 0.45;
+        }
+
+        .sagSus {
+            position: absolute;
+            right: 7%;
+            top: 45px;
+            font-size: 70px;
+            opacity: 0.45;
+        }
+
+        /* KOLEKSİYON BAŞLIĞI */
+        .bolumBasligi {
+            text-align: center;
+            padding: 45px 20px 0;
+        }
+
+        .bolumBasligi h2 {
+            font-size: 35px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .bolumBasligi p {
+            color: #8D7791;
+            font-size: 16px;
+        }
+
+        /* MASAL ARAMA KUTUSU */
+        .aramaAlani {
+            max-width: 500px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        #masalAra {
+            width: 100%;
+            padding: 16px 22px;
+            border: 1px solid #E8CBAA;
+            border-radius: 30px;
+            background: #FFFCF8;
+            color: #51405F;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(116, 77, 102, 0.08);
+        }
+
+        #masalAra:focus {
+            border-color: #E87598;
+        }
+
+        #masalAra::placeholder {
+            color: #A38FA3;
+        }
+
+        /* FAVORİ FİLTRESİ */
+        .favoriFiltre {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 15px auto 0;
+            padding: 0 20px;
+        }
+
+        #favoriFiltreButonu {
+            background: #E87598;
+            color: white;
+            font-size: 13px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            width: auto;
+        }
+
+        #favoriFiltreButonu:hover {
+            background: #D85E85;
+        }
+
+        /* MASAL KARTLARI */
+        .masallar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 30px;
+            max-width: 1050px;
+            margin: 30px auto 60px;
+            padding: 20px;
+        }
+
+        .kart {
+            background: rgba(255, 252, 247, 0.96);
+            border: 1px solid #E8CBAA;
+            border-radius: 25px;
+            padding: 14px 14px 28px;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(116, 77, 102, 0.10);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .kart:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 35px rgba(116, 77, 102, 0.17);
+        }
+
+        .masalGorseli {
+            display: block;
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+.kart h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #68496C;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    margin: 22px 0 10px;
+}
+
+
+
+        .kart p {
+            color: #806E83;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 0 15px;
+            min-height: 52px;
+        }
+
+        .kartYildiz {
+            color: #CBA46C;
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        /* BUTONLAR */
+        button {
+            background: #E87598;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 30px;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background: #D85E85;
+            transform: scale(1.04);
+        }
+
+        .kartButonlari {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .kartButonlari button {
+            width: 210px;
+            max-width: 100%;
+        }
+
+        /* FAVORİ BUTONLARI */
+        .favoriButonu {
+            background: #F7E4EE;
+            color: #A95379;
+            border: 1px solid #EAC5D7;
+            font-size: 14px;
+        }
+
+        .favoriButonu:hover {
+            background: #EFD0E0;
+        }
+
+        .favoriButonu.aktif {
+            background: #E87598;
+            color: white;
+        }
+
+        /* ARAMA SONUCU MESAJI */
+        #sonucMesaji {
+            display: none;
+            text-align: center;
+            color: #806E83;
+            font-size: 18px;
+            margin: 20px auto 45px;
+            padding: 0 20px;
+        }
+
+        /* MASAL OKUMA ALANI */
+        #okumaAlani {
+            display: none;
+            max-width: 850px;
+            margin: 20px auto 65px;
+            padding: 40px;
+            background: #FFFCF8;
+            border: 1px solid #E8CBAA;
+            border-radius: 25px;
+            box-shadow: 0 12px 28px rgba(116, 77, 102, 0.10);
+            text-align: center;
+        }
+
+        #okumaAlani h2 {
+            color: #49375E;
+            font-size: 34px;
+        }
+
+        #masalMetni {
+            font-size: 19px;
+            line-height: 1.9;
+            text-align: left;
+            white-space: pre-line;
+            margin: 30px 0;
+        }
+
+        /* HAKKIMIZDA */
+        .hakkimizda {
+            background: rgba(255, 252, 247, 0.7);
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        .hakkimizda h2 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+
+        .hakkimizda p {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+            color: #806E83;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #EBD9EB;
+            color: #6F5878;
+            font-size: 14px;
+        }
+
+        /* MOBİL UYUMLULUK */
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .menu {
+                gap: 16px;
+            }
+
+            header {
+                padding: 65px 15px;
+            }
+
+            .solSus,
+            .sagSus {
+                font-size: 40px;
+            }
+
+            .masallar {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .masalGorseli {
+                height: 240px;
+            }
+
+            #okumaAlani {
+                margin: 20px;
+                padding: 25px;
+            }
+        }
+   
+   </style>
+</head>
+
+<body>
+
+    <!-- ÜST MENÜ -->
+    <nav>
+        <div class="logo">📖 Masal Dünyası</div>
+
+        <div class="menu">
+            <a href="#anasayfa">Ana Sayfa</a>
+            <a href="#masallar">Masallar</a>
+            <a href="#hakkimizda">Hakkımızda</a>
+        </div>
+    </nav>
+
+    <!-- ANA SAYFA -->
+    <header id="anasayfa">
+        <span class="solSus" aria-hidden="true">🏰</span>
+        <span class="sagSus" aria-hidden="true">☾</span>
+
+        <p class="ustYazi">✦ BİR VARMIŞ BİR YOKMUŞ ✦</p>
+
+        <h1>Masal Dünyası</h1>
+
+        <p class="slogan">
+            Hayal gücünün kapılarını arala...
+        </p>
+
+        <div class="yildizlar" aria-hidden="true">
+            ✧ ✦ ✧
+        </div>
+    </header>
+
+    <main>
+
+        <!-- MASALLAR BÖLÜMÜ -->
+        <section id="masallar">
+
+            <div class="bolumBasligi">
+                <h2>✦ Masal Koleksiyonu ✦</h2>
+                <p>Birbirinden büyülü hikâyeler seni bekliyor.</p>
+            </div>
+
+            <!-- ARAMA -->
+            <div class="aramaAlani">
+                <input
+                    type="text"
+                    id="masalAra"
+                    placeholder="🔍 Bir masal ara..."
+                    aria-label="Masal ara"
+                    oninput="masalAra()">
+            </div>
+
+            <!-- FAVORİ FİLTRESİ -->
+            <div class="favoriFiltre">
+                <button
+                    id="favoriFiltreButonu"
+                    onclick="favorileriGoster()">
+                    ♡ Yalnızca Favorilerim
+                </button>
+            </div>
+
+            <!-- DÖRT MASAL KARTI -->
+            <div class="masallar">
+
+                <!-- 1. MASAL: KELOĞLAN -->
+                <article class="kart" data-masal="keloglan">
+
+                    <img
+                        src="./görseller/keloglan.png"
+                        alt="Keloğlan ve Dev masalı"
+                        class="masalGorseli">
+
+                    <div class="kartYildiz">✧ ✦ ✧</div>
+
+                    <h2>Keloğlan ve Dev</h2>
+
+                    <p>
+                        Keloğlan'ın zekâsı ve cesaretiyle
+                        devlere karşı verdiği mücadeleyi keşfet.
+                    </p>
+
+                    <div class="kartButonlari">
+
+                        <button onclick="masalAc('keloglan')">
+                            Masalı Oku ♡
+                        </button>
+
+                        <button
+                            class="favoriButonu"
+                            onclick="favoriDegistir('keloglan')">
+                            ♡ Favorilere Ekle
+                        </button>
+
+                    </div>
+                </article>
+
+                <!-- 2. MASAL: ZÜMRÜDÜANKA -->
+                <article class="kart" data-masal="zumruduanka">
+
+                    <img
+                        src="./görseller/zumruduanka.png"
+                        alt="Zümrüdüanka Kuşu masalı"
+                        class="masalGorseli">
+
+                    <div class="kartYildiz">✧ ✦ ✧</div>
+
+                    <h2>Zümrüdüanka Kuşu</h2>
+
+                    <p>
+                        Efsanevi Zümrüdüanka'nın büyülü
+                        dünyasına doğru yolculuğa çık.
+                    </p>
+
+                    <div class="kartButonlari">
+
+                        <button onclick="masalAc('zumruduanka')">
+                            Masalı Oku ♡
+                        </button>
+
+                        <button
+                            class="favoriButonu"
+                            onclick="favoriDegistir('zumruduanka')">
+                            ♡ Favorilere Ekle
+                        </button>
+
+                    </div>
+                </article>
+
+                <!-- 3. MASAL: ÜÇ TURUNÇLAR -->
+                <article class="kart" data-masal="uc_turunclar">
+
+                    <img
+                        src="./görseller/uc_turunclar.png"
+                        alt="Üç Turunçlar masalı"
+                        class="masalGorseli">
+
+                    <div class="kartYildiz">✧ ✦ ✧</div>
+
+                    <h2>Üç Turunçlar</h2>
+
+                    <p>
+                        Üç sihirli turunç ve bir şehzadenin
+                        büyülü yolculuğunu keşfet.
+                    </p>
+
+                    <div class="kartButonlari">
+
+                        <button onclick="masalAc('uc_turunclar')">
+                            Masalı Oku ♡
+                        </button>
+
+                        <button
+                            class="favoriButonu"
+                            onclick="favoriDegistir('uc_turunclar')">
+                            ♡ Favorilere Ekle
+                        </button>
+
+                    </div>
+                </article>
+
+                <!-- 4. MASAL: ALTIN SAÇLI KIZ -->
+                <article class="kart" data-masal="altin_sacli_kiz">
+
+                    <img
+                        src="./görseller/altin_sacli_kiz.png"
+                        alt="Altın Saçlı Kız masalı"
+                        class="masalGorseli">
+
+                    <div class="kartYildiz">✧ ✦ ✧</div>
+
+                    <h2>Altın Saçlı Kız</h2>
+
+                    <p>
+                        Altın saçlarıyla tanınan genç bir kızın
+                        cesaret, dostluk ve özgürlük dolu
+                        büyülü hikâyesini keşfet.
+                    </p>
+
+                    <div class="kartButonlari">
+
+                        <button onclick="masalAc('altin_sacli_kiz')">
+                            Masalı Oku ♡
+                        </button>
+
+                        <button
+                            class="favoriButonu"
+                            onclick="favoriDegistir('altin_sacli_kiz')">
+                            ♡ Favorilere Ekle
+                        </button>
+
+                    </div>
+                </article>
+
+<!-- 5. MASAL: BILLUR KÖŞK -->
+<article class="kart" data-masal="billur_kosk">
+
+    <img
+        src="./görseller/billur_kosk.png"
+        alt="Billur Köşk masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Billur Köşk</h2>
+
+    <p>
+        Işıltılı bir köşkün gizemini keşfeden
+        genç bir kızın cesaret ve iyilik dolu
+        büyülü yolculuğuna katıl.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('billur_kosk')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('billur_kosk')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+<!-- 6. MASAL: UÇAN HALININ SIRRI -->
+<article class="kart" data-masal="ucan_hali">
+
+    <img
+        src="./görseller/ucan_hali.png"
+        alt="Uçan Halının Sırrı masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Uçan Halının Sırrı</h2>
+
+    <p>
+        Sihirli bir halının peşine düşen
+        genç bir kahramanın gökyüzüne uzanan
+        büyülü macerasını keşfet.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('ucan_hali')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('ucan_hali')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+<!-- 7. MASAL: SİHİRLİ NAR AĞACI -->
+<article class="kart" data-masal="sihirli_nar_agaci">
+
+    <img
+        src="./görseller/sihirli_nar_agaci.png"
+        alt="Sihirli Nar Ağacı masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Sihirli Nar Ağacı</h2>
+
+    <p>
+        Gizemli bir nar ağacının sırrını keşfeden
+        genç bir kızın iyilik ve cesaret dolu
+        büyülü yolculuğuna katıl.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('sihirli_nar_agaci')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('sihirli_nar_agaci')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+<!-- 8. MASAL: BÜYÜLÜ GEYİĞİN SIRRI -->
+<article class="kart" data-masal="buyulu_geyik">
+
+    <img
+        src="./görseller/buyulu_geyik.png"
+        alt="Büyülü Geyiğin Sırrı masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Büyülü Geyiğin Sırrı</h2>
+
+    <p>
+        Ormanın derinliklerinde karşılaştığı
+        büyülü bir geyikle dost olan genç bir kızın
+        gizemli macerasını keşfet.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('buyulu_geyik')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('buyulu_geyik')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- 9. MASAL: DENİZİN SİHİRLİ YUNUSU -->
+<article class="kart" data-masal="sihirli_yunus">
+
+    <img
+        src="./görseller/denizin_sihirli_yunusu.png"
+        alt="Denizin Sihirli Yunusu masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Denizin Sihirli Yunusu</h2>
+
+    <p>
+        Deniz kenarında yaşayan bir kızın,
+        büyülü bir yunusla kurduğu dostluğu
+        ve denizin gizemli dünyasını keşfet.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('sihirli_yunus')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('sihirli_yunus')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+<!-- 10. MASAL: AY IŞIĞININ ANAHTARI -->
+<article class="kart" data-masal="ay_isiginin_anahtari">
+
+    <img
+        src="./görseller/ay_isiginin_anahtari.png"
+        alt="Ay Işığının Anahtarı masalının çizimi"
+        class="masalGorseli">
+
+    <div class="kartYildiz">✧ ✦ ✧</div>
+
+    <h2>Ay Işığının Anahtarı</h2>
+
+    <p>
+        Ay ışığında parlayan gizemli bir anahtarın
+        sırrını çözmeye çalışan genç bir kızın
+        yıldızlarla dolu büyülü macerasını keşfet.
+    </p>
+
+    <div class="kartButonlari">
+
+        <button onclick="masalAc('ay_isiginin_anahtari')">
+            Masalı Oku ♡
+        </button>
+
+        <button
+            class="favoriButonu"
+            onclick="favoriDegistir('ay_isiginin_anahtari')">
+            ♡ Favorilere Ekle
+        </button>
+
+    </div>
+
+</article>
+
+            </div>
+
+            <p id="sonucMesaji" aria-live="polite">
+                Bu aramaya uygun masal bulunamadı.
+            </p>
+
+        </section>
+
+        <!-- MASAL OKUMA BÖLÜMÜ -->
+        <section id="okumaAlani" aria-live="polite">
+
+            <div class="kartYildiz">✧ ✦ ✧</div>
+
+            <h2 id="masalBasligi"></h2>
+
+            <p id="masalMetni"></p>
+
+            <button onclick="masalKapat()">
+                Masalı Kapat
+            </button>
+
+        </section>
+
+        <!-- HAKKIMIZDA -->
+        <section class="hakkimizda" id="hakkimizda">
+
+            <h2>✧ Bir Masalın Başlangıcı ✧</h2>
+
+            <p>
+                Masal Dünyası, geleneksel masalların büyülü
+                atmosferini dijital ortamda yaşatmak için
+                tasarlanmış bir masal koleksiyonudur.
+                Her hikâye, hayal gücüne açılan yeni bir kapıdır.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        ✦ Masal Dünyası ✦
+        <p>Bir varmış, bir yokmuş...</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        /* MASALLARIN HİKÂYELERİ */
+        const masallar = {
+
+            keloglan: {
+                baslik: "Keloğlan ve Dev",
+                metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, küçük bir köyde Keloğlan ile yaşlı annesi yaşarmış.
+
+Keloğlan'ın ne büyük bir serveti ne de gösterişli bir evi varmış. Ama aklı, cesareti ve neşeli yüreği sayesinde köyde herkes onu tanırmış.
+
+Bir gün köylüler büyük bir korkuya kapılmış. Çünkü dağın ardındaki mağarada yaşayan kocaman bir dev, köyün yollarını tutmuş. Tarlalardan geçenleri korkutuyor, değirmene götürülen un çuvallarını alıp götürüyormuş.
+
+Köyün en güçlü delikanlıları bile devle karşılaşmaya cesaret edemiyormuş.
+
+Keloğlan, annesinin yanına gidip:
+
+"Anacığım, bu dev yüzünden herkes korku içinde. Ben gidip onunla konuşacağım," demiş.
+
+Annesi endişeyle başını sallamış.
+
+"Aman oğlum! O dev senden kat kat büyük. Sakın kendini tehlikeye atma."
+
+Keloğlan gülümsemiş.
+
+"Merak etme anacığım. Her iş yalnızca kuvvetle çözülmez. Bazen akıl, en büyük güçten bile üstündür."
+
+Ertesi sabah Keloğlan, yanına biraz ekmek ve bir parça peynir alarak yola çıkmış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş. Sonunda devin yaşadığı mağaraya ulaşmış.
+
+Mağaranın önünde kocaman bir gölge belirmiş. Dev öyle büyükmüş ki başı neredeyse ağaçların tepesine değiyormuş.
+
+Dev, Keloğlan'ı görünce gürlemiş:
+
+"Sen de kimsin küçük adam? Benden korkmuyor musun?"
+
+Keloğlan hiç telaşlanmadan cevap vermiş:
+
+"Ben Keloğlan'ım. Korkmaya vaktim yok. Senin ne kadar güçlü olduğunu duydum da seni görmeye geldim."
+
+Dev böbürlenmiş.
+
+"Bu dağlarda benden güçlüsü yoktur!"
+
+Keloğlan düşünceli görünerek başını kaşımış.
+
+"Öyleyse bunu kanıtlaman gerekir. Bizim köyde güçlünün kim olduğunu anlamak için yarış yapılır."
+
+Dev kahkahayı basmış.
+
+"Seninle mi yarışacağım? Seni bir parmağımla kaldırırım!"
+
+Keloğlan:
+
+"Önce bir taş sıkma yarışı yapalım," demiş.
+
+Yerden iki taş almış gibi yapmış. Oysa cebinde annesinin verdiği beyaz peynir varmış.
+
+Dev eline kocaman bir taş almış. Bütün gücüyle sıkmış ama taştan tek damla su çıkaramamış.
+
+Keloğlan ise avucundaki peyniri sıktığında parmaklarının arasından su damlamış.
+
+"Bak bakalım," demiş Keloğlan. "Benim taşımın suyu bile çıktı!"
+
+Dev şaşkınlıktan ağzını açık bırakmış.
+
+"Bu küçük adam nasıl böyle güçlü olabilir?" diye düşünmüş.
+
+Keloğlan devin şaşkınlığını görünce ikinci yarışa geçmiş.
+
+"Şimdi de kimin daha uzağa taş fırlatacağını görelim."
+
+Dev kocaman bir kaya kaldırıp bütün gücüyle fırlatmış. Kaya uzaklarda büyük bir gürültüyle yere düşmüş.
+
+Keloğlan ise yol boyunca yanında taşıdığı küçük bir kuşu avucuna almış. Kuşu gökyüzüne doğru bırakmış.
+
+Kuş kanat çırparak uçmuş, uçmuş ve gözden kaybolmuş.
+
+Keloğlan:
+
+"Benim attığım hâlâ yere düşmedi!" demiş.
+
+Dev gökyüzüne bakmış. Gerçekten de ortada düşen bir şey yokmuş.
+
+Bu kez iyice korkmaya başlamış.
+
+"Sen sandığımdan da güçlüsün Keloğlan," demiş.
+
+Keloğlan fırsatı değerlendirmiş.
+
+"Benimle yarıştın, şimdi de bir söz vermelisin. Köylülerin yolunu kesmeyecek, kimsenin yiyeceğini almayacak ve insanları korkutmayacaksın."
+
+Dev biraz düşünmüş.
+
+"Peki," demiş. "Ama ben de burada tek başıma yaşıyorum. Bazen yiyecek bulamadığım için köye iniyorum."
+
+Keloğlan devin sözlerini dinleyince onun da bir derdi olduğunu anlamış.
+
+"Öyleyse köylülerle konuşalım. Sen onlara zarar vermezsen onlar da sana yardım eder. Hatta güçlü kollarınla değirmene odun taşıyabilir, tarlalarda çalışabilirsin."
+
+Dev bu fikri çok beğenmiş.
+
+İkisi birlikte köye dönmüş. Köylüler önce korkmuş ama Keloğlan olanları anlatınca rahatlamışlar.
+
+O günden sonra dev kimseyi korkutmamış. Köylülere ağır işlerde yardım etmiş, karşılığında yiyecek almış.
+
+Keloğlan da annesinin yanına dönmüş.
+
+Annesi onu görünce sevinçle sarılmış.
+
+"Demek devi yendin oğlum!"
+
+Keloğlan gülerek cevap vermiş:
+
+"Yendim anacığım, ama yumrukla değil; akılla ve konuşarak!"
+
+Böylece köyde herkes anlamış ki gerçek güç yalnızca kuvvette değil, zekâda, cesarette ve iyilikteymiş.
+
+Gökten üç elma düşmüş: Biri aklını kullananlara, biri iyilik yapanlara, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+            },
+
+            zumruduanka: {
+                baslik: "Zümrüdüanka Kuşu",
+                metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, uzak ülkelerin birinde görkemli bir sarayda yaşayan bir padişah varmış.
+
+Bu padişahın üç oğlu varmış. Büyük oğulları güçlü ve kendilerine güvenen delikanlılarmış. En küçük oğlu ise sessiz, merhametli ve cesur bir gençmiş.
+
+Sarayın bahçesinde, yılda yalnızca bir kez meyve veren sihirli bir elma ağacı yetişirmiş. Bu ağacın altın renkli elmaları, gören herkesi hayran bırakırmış.
+
+Fakat ne zaman elmalar olgunlaşsa gecenin karanlığında gizemli bir kuş gelip hepsini götürürmüş.
+
+Padişah bu duruma çok üzülmüş ve oğullarını yanına çağırmış.
+
+"Bu yıl elmalarımızı koruyacaksınız. Bakalım bu gizemli kuşu kim yakalayacak!" demiş.
+
+İlk gece büyük oğlu ağacın altında nöbet tutmuş. Fakat gece yarısına doğru uyuyakalmış. Sabah olduğunda elmalar yine kaybolmuş.
+
+İkinci gece ortanca oğlu nöbet tutmuş. O da ne kadar direnirse dirensin sonunda uykuya yenilmiş.
+
+Üçüncü gece sıra en küçük şehzadeye gelmiş.
+
+Şehzade sabaha kadar gözünü kırpmamış. Tam gece yarısında gökyüzünden kanatları ışıl ışıl parlayan, tüyleri zümrüt yeşili ve altın renginde olan dev bir kuş süzülmüş.
+
+Bu, efsanelerde adı geçen Zümrüdüanka Kuşu'ymuş!
+
+Şehzade kuşu yakalamaya çalışmış ama kuş kanatlarını açıp göğe yükselmiş. Ardında yalnızca parlak bir tüy bırakmış.
+
+Sabah olduğunda şehzade tüyü babasına göstermiş.
+
+Padişah hayretle:
+
+"Bu kuşu bulup getiren oğluma büyük bir ödül vereceğim!" demiş.
+
+Üç kardeş kuşu aramak için yola çıkmışlar.
+
+Az gitmişler, uz gitmişler; dere tepe düz gitmişler. Sonunda yolları üçe ayrılmış.
+
+Büyük kardeşler kolay görünen yolları seçmiş. Küçük şehzade ise karanlık bir ormana uzanan dar patikadan ilerlemiş.
+
+Günler sonra karşısına yaşlı bir derviş çıkmış.
+
+Derviş:
+
+"Evladım, nereye böyle?" diye sormuş.
+
+Şehzade başından geçenleri anlatmış.
+
+Derviş gülümsemiş.
+
+"Aradığın kuş, Kaf Dağı'nın ardındaki gizli bahçede yaşar. Fakat oraya ulaşmak için yalnızca cesaret yetmez. Sabırlı ve iyi kalpli olmalısın."
+
+Şehzade dervişe teşekkür etmiş ve yoluna devam etmiş.
+
+Bir süre sonra ormanda yaralı bir ceylan görmüş. Ceylanın ayağı dikenli dallara takılmış.
+
+Şehzade acele etmesine rağmen durup ceylanı kurtarmış. Yaralarını temizlemiş ve ona su vermiş.
+
+Ceylan iyileşince ormanın derinliklerine doğru koşmuş. Birkaç adım sonra durup şehzadeye bakmış; sanki kendisini takip etmesini istiyormuş.
+
+Şehzade ceylanın peşinden gidince gizli bir geçit bulmuş.
+
+Bu geçit onu Kaf Dağı'nın eteklerine ulaştırmış.
+
+Dağın tepesine çıkmak çok zormuş. Keskin kayalar, soğuk rüzgârlar ve karanlık mağaralar yolunu kesmiş.
+
+Ama şehzade vazgeçmemiş.
+
+Sonunda dağın ardında, rengârenk çiçeklerle dolu büyülü bir bahçeye ulaşmış.
+
+Bahçenin ortasında gökyüzüne kadar uzanan kocaman bir ağaç varmış. Ağacın en yüksek dalında Zümrüdüanka Kuşu oturuyormuş.
+
+Şehzade kuşa yaklaşmış.
+
+"Ey güzel kuş! Seni bulmak için çok uzun yollardan geldim. Babamın bahçesindeki elmaları neden alıyorsun?" diye sormuş.
+
+Zümrüdüanka Kuşu kanatlarını açmış ve insan sesiyle konuşmuş:
+
+"Ben o elmaları açgözlülüğümden almıyorum. Onların sihirli gücü, bu dağın ardındaki kuruyan ormanı yeniden yeşertiyor."
+
+Şehzade şaşırmış.
+
+"Demek o elmalar başka canlıların yaşamını kurtarıyor," demiş.
+
+Kuş başını sallamış.
+
+"Fakat artık bahçenize gelmek istemiyorum. İnsanlarla anlaşarak bu sorunu çözebiliriz."
+
+Şehzade bir süre düşünmüş.
+
+"Öyleyse babamla konuşacağım. Elmaların bir bölümünü sana ayırabiliriz. Böylece hem bizim bahçemiz meyve verir hem de ormanın yeniden yeşermesine yardım ederiz."
+
+Zümrüdüanka Kuşu bu öneriyi çok beğenmiş.
+
+"İyilikle verilen bir karar, zorla kazanılan bir zaferden değerlidir," demiş.
+
+Sonra şehzadeye parlak bir tüy uzatmış.
+
+"Bu tüyü sakla. Bir gün yardıma ihtiyacın olursa onu gökyüzüne kaldır."
+
+Şehzade kuşa teşekkür ederek dönüş yoluna çıkmış.
+
+Kaf Dağı'nı aşmış, ormanlardan geçmiş ve sonunda sarayına ulaşmış.
+
+Padişah oğlunu görünce sevinmiş.
+
+"Zümrüdüanka Kuşu'nu bulabildin mi?" diye sormuş.
+
+Şehzade:
+
+"Evet babacığım. Ama onu yakalamadım. Onunla konuştum ve neden elmalarımızı aldığını öğrendim," demiş.
+
+Sonra kuşun anlattıklarını babasına açıklamış.
+
+Padişah önce şaşırmış, ardından oğlunun düşüncesini doğru bulmuş.
+
+O günden sonra sarayın bahçesindeki altın elmaların bir bölümü Zümrüdüanka Kuşu için ayrılmış.
+
+Kuş her yıl bahçeye gelmiş, kendisine ayrılan elmaları almış ve uzak ormanların yeniden yeşermesine yardım etmiş.
+
+Zamanla kurumuş ağaçlar çiçek açmış, dereler yeniden akmış, hayvanlar yuvalarına dönmüş.
+
+Padişah en küçük oğluna dönerek:
+
+"Sen yalnızca cesaretini değil, merhametini ve aklını da gösterdin. Gerçek bir hükümdarın sahip olması gereken özellikler bunlardır," demiş.
+
+Şehzade ise bu yolculuk sayesinde önemli bir şey öğrenmiş: Bazen en büyük başarı, bir şeyi ele geçirmek değil, onu anlamakmış.
+
+Gökten üç elma düşmüş: Biri iyilik yapanlara, biri doğayı koruyanlara, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+            },
+
+            uc_turunclar: {
+                baslik: "Üç Turunçlar",
+                metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, uzak ülkelerin birinde genç bir şehzade yaşarmış.
+
+Bu şehzade, sarayın görkemli salonlarında büyümüş olsa da dünyayı tanımayı, yeni yerler görmeyi ve bilinmeyen hikâyelerin peşinden gitmeyi çok severmiş.
+
+Günlerden bir gün, saraya gelen yaşlı bir yolcu ona uzak bir bahçeden söz etmiş. Bu bahçede, dallarında yalnızca üç turunç bulunan sihirli bir ağaç yetişirmiş.
+
+Yaşlı yolcu, "Bu turunçların sırrını öğrenmek isteyen kişi cesur, sabırlı ve iyi kalpli olmalıdır," demiş.
+
+Şehzade bu sözleri duyunca merakına yenilmiş. Ertesi sabah atına binmiş, ailesiyle vedalaşmış ve sihirli bahçeyi bulmak üzere yola çıkmış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş. Günler boyunca ormanlardan, dağlardan ve vadilerden geçmiş.
+
+Bir akşam, ormanın kıyısında yaşlı bir kadınla karşılaşmış. Kadın susuzluktan bitkin düşmüş, yolun kenarında dinleniyormuş.
+
+Şehzade hiç düşünmeden matarasındaki suyu onunla paylaşmış. Çantasındaki ekmeğin yarısını da kadına vermiş.
+
+Yaşlı kadın gülümsemiş.
+
+"İyiliğinin karşılığını göreceksin evladım," demiş. "Aradığın bahçe, şu dağın ardındadır. Fakat unutma, turunçları kopardıktan sonra onları yalnızca suyun bulunduğu bir yerde açmalısın."
+
+Şehzade kadına teşekkür ederek yoluna devam etmiş.
+
+Ertesi gün, güneş doğarken sihirli bahçeye ulaşmış. Bahçenin ortasında, yaprakları gümüş gibi parlayan bir ağaç duruyormuş. Dallarında ise altın renginde üç turunç asılıymış.
+
+Şehzade turunçları dikkatlice koparmış ve heybesine yerleştirmiş.
+
+Dönüş yolunda merakına engel olamamış. İlk turuncu açmış. Bir anda içinden güzel bir genç kız çıkmış.
+
+Genç kız, "Su! Bana biraz su verir misin?" diye seslenmiş.
+
+Fakat şehzadenin matarası boşmuş. Genç kız bir ışık gibi kaybolmuş.
+
+Şehzade çok üzülmüş. Yaşlı kadının uyarısını hatırlamış ama iş işten geçmiş.
+
+Bir süre sonra ikinci turuncu da açmış. İçinden yine güzel bir genç kız çıkmış ve su istemiş.
+
+Şehzade çevresine bakınmış, fakat yakınlarda ne bir dere ne de bir çeşme varmış. İkinci genç kız da gözden kaybolmuş.
+
+Şehzade artık üçüncü turuncu açmak için acele etmemeye karar vermiş.
+
+Uzun süre yürümüş. Sonunda berrak suların aktığı bir pınara ulaşmış.
+
+Pınarın yanına oturmuş, son turuncu ellerinin arasına almış ve dikkatlice açmış.
+
+Turuncun içinden üçüncü bir genç kız çıkmış.
+
+"Su..." diye fısıldamış.
+
+Şehzade hemen avuçlarıyla pınardan su alıp ona uzatmış. Genç kız suyu içince yüzüne renk gelmiş ve gülümsemiş.
+
+"Sen sabretmeyi ve verdiğin sözü tutmayı öğrendin," demiş. "Beni bu büyüden kurtardığın için teşekkür ederim."
+
+Şehzade, genç kızın da yıllar önce bir büyü yüzünden turuncun içine hapsedilmiş bir prenses olduğunu öğrenmiş.
+
+İkisi birlikte uzun uzun konuşmuşlar. Şehzade başından geçenleri anlatmış; prenses de ona kendi ülkesini ve ailesini özlediğini söylemiş.
+
+Bunun üzerine şehzade, prensesin ailesine kavuşmasına yardım etmeye karar vermiş.
+
+Birlikte yola çıkmışlar. Dağları aşmış, ormanları geçmiş ve sonunda prensesin ülkesine ulaşmışlar.
+
+Kızlarını yeniden gören kral ve kraliçe sevinçten gözyaşlarına boğulmuş. Sarayda günlerce süren bir şenlik düzenlenmiş.
+
+Şehzade, bu yolculukta en değerli hazinenin sihirli turunçlar değil; iyilik, sabır ve verilen sözlere bağlılık olduğunu anlamış.
+
+Gökten üç elma düşmüş: Biri sabredenlere, biri iyilik yapanlara, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+            },
+
+            altin_sacli_kiz: {
+                baslik: "Altın Saçlı Kız",
+              metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, yemyeşil ormanlarla çevrili uzak bir ülkede, altın gibi parlayan uzun saçları olan genç bir kız yaşarmış.
+
+Herkes ona Altın Saçlı Kız dermiş.
+
+Kız, yüksek tepelerin üzerinde bulunan eski bir şatoda büyümüş. Şatonun pencerelerinden uzak dağları, nehirleri ve rengârenk köyleri görebiliyormuş.
+
+Fakat şatonun dışına çıkmasına izin verilmiyormuş.
+
+Onu büyüten yaşlı büyücü, dış dünyanın tehlikelerle dolu olduğunu söylüyormuş.
+
+"Burada güvendesin," dermiş. "Dışarı çıkmana gerek yok."
+
+Altın Saçlı Kız ise her sabah penceresine oturur, gökyüzünde özgürce uçan kuşları izlermiş.
+
+Bir gün küçük, mavi kanatlı bir kuş penceresine konmuş.
+
+Kız gülümseyerek:
+
+"Merhaba küçük dostum. Sen nerelerden geliyorsun?" diye sormuş.
+
+Kuş, şaşırtıcı bir şekilde konuşmaya başlamış.
+
+"Uzak ormanlardan, çiçekli vadilerden ve şarkı söyleyen nehirlerden geliyorum."
+
+Altın Saçlı Kız hayranlıkla dinlemiş.
+
+"Peki, dünya gerçekten bu kadar güzel mi?"
+
+Kuş kanatlarını çırpmış.
+
+"Dünya çok güzel. Ama güzelliğini görmek için bazen cesur olmak gerekir."
+
+O günden sonra kuş her sabah şatonun penceresine gelmiş.
+
+Kıza uzak ülkelerden, yıldızlarla aydınlanan göllerden ve rüzgârla dans eden çiçeklerden söz etmiş.
+
+Altın Saçlı Kız'ın içindeki merak giderek büyümüş.
+
+Bir gece gökyüzünde dolunay parlıyormuş.
+
+Kız, artık kendi yolunu çizmesi gerektiğine karar vermiş.
+
+Şatonun eski kitaplığında bulduğu bir haritayı yanına almış. Küçük bir çantaya ekmek, su ve birkaç eşya koymuş.
+
+Sonra şatonun uzun merdivenlerinden aşağı inmiş.
+
+Kapının önüne geldiğinde kalbi hızla çarpmaya başlamış.
+
+"Ya dışarıdaki dünya gerçekten tehlikeliyse?" diye düşünmüş.
+
+Tam o sırada mavi kuş yanına konmuş.
+
+"Korkmak, cesur olmadığın anlamına gelmez," demiş. "Cesaret, korkarken de doğru bildiğin yolda ilerleyebilmektir."
+
+Altın Saçlı Kız derin bir nefes almış ve şatonun kapısını açmış.
+
+Hayatında ilk kez çimenlere basmış, yüzünde rüzgârı hissetmiş ve çiçeklerin kokusunu içine çekmiş.
+
+Sabah olunca ormanın içinden geçen dar bir patikada yürümeye başlamış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş.
+
+Bir süre sonra küçük bir dereye ulaşmış.
+
+Derenin kıyısında ağlayan bir tavşan görmüş.
+
+"Ne oldu küçük tavşan?" diye sormuş.
+
+Tavşan üzgün bir sesle cevap vermiş:
+
+"Yuvamı bulamıyorum. Ormanda yolumu kaybettim."
+
+Altın Saçlı Kız haritasına bakmış. Tavşanın anlattığı büyük meşe ağacını bulmak için onunla birlikte yürümüş.
+
+Bir süre sonra tavşanın yuvasına ulaşmışlar.
+
+Tavşan sevinçle zıplamış.
+
+"Teşekkür ederim! Sen gerçekten çok iyi kalplisin."
+
+Altın Saçlı Kız gülümsemiş.
+
+"Birine yardım edebilmek, yolculuğumun en güzel kısmı oldu."
+
+Yoluna devam ederken güneş yavaş yavaş batmaya başlamış.
+
+Ormanın derinliklerinde eski bir taş köprüye ulaşmış.
+
+Fakat köprünün ortası yıkılmış.
+
+Karşı kıyıda küçük bir köy görünüyormuş. Köyün ışıkları yanıyor, bacalardan dumanlar yükseliyormuş.
+
+Altın Saçlı Kız köprüyü geçemeyeceğini anlayınca üzülmüş.
+
+Tam geri dönmek üzereyken mavi kuş yeniden ortaya çıkmış.
+
+"Her engelin bir çözümü vardır," demiş. "Yeter ki çevrene dikkatle bak."
+
+Kız etrafına bakınmış.
+
+Biraz ileride, derenin sığlaştığı yerde yan yana dizilmiş büyük taşlar görmüş.
+
+Dikkatlice taşların üzerine basarak karşı kıyıya geçmiş.
+
+Köye ulaştığında yaşlı bir kadın onu karşılamış.
+
+"Hoş geldin evladım. Uzun yoldan gelmiş gibisin."
+
+Altın Saçlı Kız başından geçenleri anlatmış.
+
+Yaşlı kadın onu evine davet etmiş, sıcak çorba ikram etmiş ve dinlenmesi için bir oda hazırlamış.
+
+Ertesi sabah kız köy meydanına çıktığında çocukların neşeyle oynadığını, insanların birbirine yardım ettiğini görmüş.
+
+Şatoda yalnız başına geçirdiği yılları hatırlamış.
+
+"Demek dünya yalnızca tehlikelerden oluşmuyormuş," diye düşünmüş. "Dostluk, iyilik ve paylaşmak da varmış."
+
+Birkaç gün sonra yaşlı büyücü köye gelmiş.
+
+Altın Saçlı Kız'ı bulduğunda çok şaşırmış.
+
+"Buraya nasıl geldin? Dışarıda başına kötü bir şey gelmesinden korktum," demiş.
+
+Kız sakin bir sesle cevap vermiş:
+
+"Beni korumak istediğini biliyorum. Ama dünyayı tanımak, öğrenmek ve kendi kararlarımı vermek istiyorum."
+
+Büyücü uzun süre sessiz kalmış.
+
+Sonunda başını eğmiş.
+
+"Belki de seni korumaya çalışırken büyümene engel oldum," demiş.
+
+Altın Saçlı Kız gülümsemiş.
+
+"Şato benim evim olabilir. Ama bütün hayatım yalnızca o duvarların içinde geçmek zorunda değil."
+
+Büyücü onun ne kadar cesur ve düşünceli biri olduğunu anlamış.
+
+O günden sonra Altın Saçlı Kız dilediği zaman yolculuğa çıkmış, yeni yerler keşfetmiş ve farklı insanlarla dostluk kurmuş.
+
+Şatoya döndüğünde öğrendiklerini başkalarıyla paylaşmış.
+
+Bir zamanlar yalnızca pencereden izlediği dünya, artık onun için keşfedilmeyi bekleyen kocaman bir masala dönüşmüş.
+
+Altın Saçlı Kız anlamış ki gerçek özgürlük, yalnızca uzaklara gitmek değil; kendi kararlarını verebilmek, öğrenmek ve başkalarına iyilik yapabilmekmiş.
+
+Gökten üç elma düşmüş: Biri cesaret gösterenlere, biri dostluğa değer verenlere, biri de hayallerinin peşinden gidenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+ billur_kosk: {
+            baslik: "Billur Köşk",
+           metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, dağların ardında yemyeşil vadilerle çevrili küçük bir köy varmış.
+
+Bu köyde Elif adında meraklı, cesur ve iyi kalpli bir genç kız yaşarmış.
+
+Elif, her akşam köyün yaşlılarından masallar dinlemeyi çok severmiş. Bir gün yaşlı bir nine, uzak dağların ardında bulunan gizemli bir köşkten söz etmiş.
+
+Bu köşkün duvarları billurdan, pencereleri renkli camlardan, kapıları ise gümüşten yapılmış.
+
+Güneş doğduğunda köşk binlerce yıldız gibi parlarmış.
+
+Fakat köşkün çok önemli bir sırrı varmış.
+
+Söylentiye göre köşkün kapıları yalnızca iyi kalpli insanlara açılırmış.
+
+Elif bu hikâyeyi duyunca çok heyecanlanmış.
+
+"Bu köşkü kendi gözlerimle görmek istiyorum!" demiş.
+
+Ertesi sabah erkenden kalkmış. Çantasına biraz ekmek, su ve annesinin ördüğü küçük bir mendil koymuş.
+
+Annesine sarılıp yola çıkmış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş.
+
+Günler boyunca ormanlardan, tepelerden ve çiçekli vadilerden geçmiş.
+
+Bir gün yolun kenarında kanadı incinmiş küçük bir kuş görmüş.
+
+Kuş uçmaya çalışıyor ama bir türlü havalanamıyormuş.
+
+Elif hemen yanına oturmuş.
+
+"Korkma küçük dostum, sana yardım edeceğim," demiş.
+
+Çantasından mendilini çıkarıp kuşun kanadını dikkatlice sarmış.
+
+Sonra kuşu güvenli bir ağacın altına bırakmış.
+
+Kuş başını kaldırıp Elif'e bakmış.
+
+"İyiliğini unutmayacağım," demiş.
+
+Elif çok şaşırmış. Çünkü kuş insan gibi konuşmuş!
+
+Fakat daha fazla soru soramadan kuş kanatlarını çırpıp gözden kaybolmuş.
+
+Elif yoluna devam etmiş.
+
+Bir süre sonra karşısına büyük bir nehir çıkmış.
+
+Nehir öyle hızlı akıyormuş ki karşı kıyıya geçmek neredeyse imkânsızmış.
+
+Elif ne yapacağını düşünürken kıyıda yaşlı bir adam görmüş.
+
+Adam ağır bir odun sepetini taşımaya çalışıyormuş.
+
+Elif hemen yanına gitmiş.
+
+"Size yardım edebilir miyim?" diye sormuş.
+
+Yaşlı adam gülümsemiş.
+
+"Çok sevinirim evladım," demiş.
+
+Elif sepetin bir ucundan tutmuş ve yaşlı adamla birlikte odunları yakındaki kulübeye taşımış.
+
+Adam teşekkür ederek ona küçük, gümüş renkli bir anahtar vermiş.
+
+"Bu anahtar bir gün işine yarayabilir," demiş.
+
+Elif anahtarı çantasına koymuş.
+
+Sonra nehrin karşısına geçmenin bir yolunu aramaya başlamış.
+
+Tam o sırada daha önce yardım ettiği küçük kuş ortaya çıkmış.
+
+"Elif! Beni hatırladın mı?" diye seslenmiş.
+
+Elif sevinçle:
+
+"Elbette hatırladım!" demiş.
+
+Kuş nehrin aşağısına doğru uçmuş.
+
+Elif onu takip etmiş.
+
+Bir süre sonra büyük taşların yan yana dizildiği sığ bir geçide ulaşmış.
+
+Dikkatlice taşların üzerinden yürüyerek karşı kıyıya geçmiş.
+
+"Teşekkür ederim küçük dostum!" diye seslenmiş.
+
+Kuş:
+
+"İyilik bazen hiç beklemediğin bir anda sana geri döner," demiş.
+
+Elif yolculuğuna devam etmiş.
+
+Akşamüstü, dağların arasından yükselen parlak bir ışık görmüş.
+
+Işığa doğru yürüdüğünde gözlerine inanamayacağı kadar güzel bir manzarayla karşılaşmış.
+
+Karşısında billurdan yapılmış görkemli bir köşk duruyormuş!
+
+Duvarları güneş ışığında gökkuşağının bütün renkleriyle parlıyor, pencerelerinden altın renkli ışıklar süzülüyormuş.
+
+Köşkün çevresinde rengârenk çiçekler açıyor, küçük şelaleler berrak havuzlara dökülüyormuş.
+
+Elif heyecanla köşkün kapısına yaklaşmış.
+
+Fakat kapı kilitliymiş.
+
+Üzerinde altın harflerle bir yazı bulunuyormuş:
+
+"Gerçek zenginlik, kalpte saklıdır."
+
+Elif yazıyı birkaç kez okumuş.
+
+Sonra yaşlı adamın verdiği gümüş anahtarı hatırlamış.
+
+Anahtarı kilide yerleştirmiş.
+
+Kapı yavaşça açılmış.
+
+Elif içeri girdiğinde karşısında kocaman bir salon belirmiş.
+
+Salonun ortasında ışıl ışıl parlayan bir billur ayna varmış.
+
+Aynanın önünde beyaz elbiseli yaşlı bir kadın duruyormuş.
+
+Kadın gülümseyerek:
+
+"Hoş geldin Elif. Seni bekliyorduk," demiş.
+
+Elif şaşkınlıkla sormuş:
+
+"Beni mi bekliyordunuz?"
+
+Kadın başını sallamış.
+
+"Bu köşke ulaşmak isteyen pek çok kişi oldu. Kimisi altın aradı, kimisi mücevher. Fakat sen yol boyunca karşılaştığın canlılara yardım ettin."
+
+Elif:
+
+"Ben yalnızca yardıma ihtiyaçları olduğunu gördüm," demiş.
+
+Kadın gülümsemiş.
+
+"İşte bu yüzden köşkün kapısı sana açıldı."
+
+Sonra Elif'i billur aynanın önüne götürmüş.
+
+Aynada Elif'in kendi yansıması yerine yolculuğu görünmeye başlamış.
+
+Önce yaralı kuşa yardım ettiği anı görmüş.
+
+Ardından yaşlı adamın odunlarını taşıdığı günü izlemiş.
+
+Son olarak nehirden geçerken küçük kuşun kendisine yardım edişini görmüş.
+
+Kadın konuşmuş:
+
+"Bu köşkün en büyük hazinesi altın ya da mücevher değildir. Burada iyiliğin gücü korunur."
+
+Elif aynaya hayranlıkla bakmış.
+
+"Peki bu hazineyi nasıl kullanabilirim?" diye sormuş.
+
+Kadın ona küçük, şeffaf bir billur taş vermiş.
+
+"Bu taşın sihirli bir gücü yok," demiş. "Ama sana bugün öğrendiklerini hatırlatacak. Bir insanın kalbindeki iyilik, en değerli hazineden bile kıymetlidir."
+
+Elif taşı dikkatlice çantasına koymuş.
+
+Köşkte bir gece misafir olmuş.
+
+Ertesi sabah köyüne dönmek üzere yola çıkmış.
+
+Yol boyunca karşılaştığı insanlara yardım etmiş, gördüğü güzellikleri hafızasına kaydetmiş.
+
+Sonunda köyüne ulaştığında annesi onu sevinçle karşılamış.
+
+"Billur Köşk'ü bulabildin mi kızım?" diye sormuş.
+
+Elif gülümsemiş.
+
+"Evet anneciğim. Ama orada öğrendiğim en önemli şey, bir köşkten çok daha değerliydi."
+
+Annesi merakla sormuş:
+
+"Neymiş o?"
+
+Elif cevap vermiş:
+
+"İyilik, paylaştıkça çoğalan tek hazinedir."
+
+O günden sonra Elif, Billur Köşk'ün hikâyesini köydeki çocuklara anlatmış.
+
+Çocuklar da birbirlerine yardım etmeye, doğayı korumaya ve sahip olduklarını paylaşmaya daha çok önem vermişler.
+
+Böylece Billur Köşk'ün gerçek hazinesi, uzak dağların ardında değil, insanların kalplerinde yaşamaya devam etmiş.
+
+Gökten üç elma düşmüş: Biri iyilik yapanlara, biri paylaşmayı bilenlere, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+ucan_hali: {
+    baslik: "Uçan Halının Sırrı",
+    metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, uzak ülkelerin birinde Emir adında meraklı ve cesur bir genç yaşarmış.
+
+Emir, küçük bir kasabada annesiyle birlikte yaşarmış. Annesi halı dokur, Emir de ona yardım edermiş. Renkli ipliklerden oluşan desenlere bakarken hep uzak ülkeleri ve bilmediği yerleri hayal edermiş.
+
+Bir gün kasabanın eski çarşısında dolaşırken küçücük bir dükkân görmüş. Dükkânın penceresinde, üzerinde altın yıldızlar bulunan lacivert bir halı duruyormuş.
+
+Emir içeri girmiş.
+
+"Bu halı ne kadar güzel!" demiş.
+
+Dükkânın sahibi, beyaz sakallı yaşlı bir adam, gülümseyerek cevap vermiş:
+
+"Bu sıradan bir halı değildir evladım. Onun çok eski bir sırrı vardır."
+
+Emir merakla sormuş:
+
+"Nasıl bir sır?"
+
+Yaşlı adam halının üzerine elini koymuş.
+
+"Bu halı uçabilir. Ama yalnızca iyi kalpli ve cesur insanlara yardım eder."
+
+Emir önce yaşlı adamın şaka yaptığını sanmış.
+
+Fakat halıya dokunduğu anda kenarlarındaki altın işlemeler parlamaya başlamış.
+
+Halı yavaşça yerden yükselmiş!
+
+Emir şaşkınlıkla geri çekilmiş.
+
+"Gerçekten uçuyor!" diye bağırmış.
+
+Yaşlı adam başını sallamış.
+
+"Bu halı yıllardır sahibini bekliyor. Belki de aradığı kişi sensindir."
+
+Emir halıya dikkatlice oturmuş.
+
+Halı birden havalanmış, dükkânın açık kapısından süzülerek gökyüzüne yükselmiş.
+
+Emir aşağıya baktığında evlerin küçücük kaldığını görmüş.
+
+Kasabanın sokakları ince çizgilere, bahçelerdeki ağaçlar yeşil noktalara dönüşmüş.
+
+Rüzgâr saçlarını savuruyor, bulutlar yanından geçiyormuş.
+
+"Bu hayatımın en güzel günü!" diye sevinçle bağırmış.
+
+Halı onu yemyeşil vadilerin, masmavi göllerin ve yüksek dağların üzerinden geçirmiş.
+
+Bir süre sonra uzakta görkemli bir şehir belirmiş.
+
+Şehrin mavi kubbeleri güneş ışığında parlıyor, yüksek kuleleri gökyüzüne uzanıyormuş.
+
+Fakat Emir şehre yaklaştığında tuhaf bir şey fark etmiş.
+
+Sokaklarda kimse gülmüyor, meydanlarda çocuklar oynamıyormuş.
+
+Şehrin üzerinde gri bir sis dolaşıyormuş.
+
+Emir halıyla büyük meydanın yanına inmiş.
+
+Orada üzgün görünen küçük bir çocukla karşılaşmış.
+
+"Bu şehir neden bu kadar sessiz?" diye sormuş.
+
+Çocuk iç çekmiş.
+
+"Çünkü şehrimizin neşesi kayboldu."
+
+Emir şaşırmış.
+
+"Neşe nasıl kaybolabilir?"
+
+Çocuk anlatmaya başlamış:
+
+"Bir zamanlar şehrimizde insanların birbirine yardım ettiği, şarkılar söylediği ve birlikte kutlamalar yaptığı büyük bir bahçe vardı. Fakat günün birinde bahçedeki sihirli çeşme kurudu. O günden sonra insanlar birbirinden uzaklaştı."
+
+Emir düşüncelere dalmış.
+
+"Peki çeşme neden kurudu?"
+
+Çocuk başını sallamış.
+
+"Bunu kimse bilmiyor. Ama yaşlı bilge, çeşmenin yeniden akması için üç iyilik gerektiğini söylüyor."
+
+Emir gülümsemiş.
+
+"Öyleyse üç iyiliği birlikte bulabiliriz!"
+
+Çocuk heyecanla ayağa kalkmış.
+
+İkisi birlikte şehrin sokaklarında yürümeye başlamış.
+
+İlk olarak pazar yerinde ağır sepetlerini taşıyamayan yaşlı bir kadın görmüşler.
+
+Emir hemen yanına gitmiş.
+
+"Size yardım edebilir miyiz?" diye sormuş.
+
+Kadın sevinçle kabul etmiş.
+
+Emir ve çocuk sepetleri kadının evine kadar taşımışlar.
+
+Kadın teşekkür ederken uzaktan küçük bir su sesi duyulmuş.
+
+Çocuk şaşkınlıkla:
+
+"Bu ses çeşmeden geliyor olabilir!" demiş.
+
+İkisi hemen bahçeye koşmuş.
+
+Gerçekten de kurumuş çeşmenin taşlarının arasından birkaç damla su süzülüyormuş.
+
+Emir sevinmiş.
+
+"Demek ilk iyiliğimiz işe yaradı!"
+
+Sonra şehrin başka bir sokağına gitmişler.
+
+Burada iki arkadaşın kırılmış bir oyuncak yüzünden tartıştığını görmüşler.
+
+Emir yanlarına yaklaşmış.
+
+"Birbirinize kızmak yerine oyuncağı birlikte tamir etmeyi deneseniz nasıl olur?" diye sormuş.
+
+Çocuklar önce sessiz kalmış.
+
+Sonra biri:
+
+"Aslında onu ben yanlışlıkla düşürdüm," demiş.
+
+Diğeri gülümsemiş.
+
+"Önemli değil. Birlikte tamir edebiliriz."
+
+Emir onlara yardım etmiş.
+
+Kısa süre sonra oyuncak yeniden kullanılabilir hâle gelmiş.
+
+İki arkadaş birbirine sarılmış.
+
+O anda çeşmeden gelen su sesi biraz daha güçlenmiş.
+
+Çocuk heyecanla:
+
+"İkinci iyiliğimiz de tamamlandı!" demiş.
+
+Fakat üçüncü iyiliği bulmak kolay olmamış.
+
+Emir ve yeni arkadaşı bütün şehri dolaşmışlar.
+
+Akşam olmak üzereyken şehrin dışında küçük bir bahçeye ulaşmışlar.
+
+Bahçenin kapısında susuz kalmış bir ağaç duruyormuş.
+
+Dalları eğilmiş, yaprakları solmuş.
+
+Emir ağaca bakınca üzülmüş.
+
+"Bu ağaç da yardıma ihtiyaç duyuyor."
+
+Çocuk:
+
+"Ama çeşmemiz henüz tamamen akmıyor. Ona nasıl su vereceğiz?" diye sormuş.
+
+Emir çantasındaki küçük matarayı çıkarmış.
+
+Bu suyu uzun yolculuğu için saklıyormuş.
+
+Bir an düşünmüş.
+
+Sonra matarasındaki suyu ağacın köklerine dökmüş.
+
+"Ben başka bir yerde su bulabilirim. Ama bu ağacın bekleyecek gücü kalmamış," demiş.
+
+Tam o anda gökyüzünde altın renkli bir ışık belirmiş.
+
+Rüzgâr hafifçe esmiş.
+
+Ağacın dalları doğrulmuş, yaprakları yeniden canlanmış.
+
+Şehrin merkezinden güçlü bir su sesi yükselmiş.
+
+Emir ve çocuk koşarak meydana dönmüşler.
+
+Sihirli çeşme yeniden akmaya başlamış!
+
+Berrak sular havuza doluyor, etrafındaki çiçekler birer birer açıyormuş.
+
+Gri sis yavaşça dağılmış.
+
+İnsanlar evlerinden çıkmış.
+
+Çocuklar yeniden gülmeye, komşular birbirleriyle konuşmaya başlamış.
+
+Şehir meydanı uzun zamandır olmadığı kadar neşeliymiş.
+
+Tam o sırada yaşlı bilge ortaya çıkmış.
+
+Emir'e yaklaşarak:
+
+"Şehrimizin neşesini geri getirdin," demiş.
+
+Emir başını sallamış.
+
+"Bunu tek başıma yapmadım. Hep birlikte başardık."
+
+Bilge gülümsemiş.
+
+"İşte sihirli çeşmenin sırrı da budur. İyilik, dostluk ve paylaşmak unutulduğunda suyu kurur. İnsanlar birbirine yardım ettiğinde yeniden canlanır."
+
+Emir o anda uçan halının neden kendisini bu şehre getirdiğini anlamış.
+
+Halı yalnızca uzak yerlere gitmek için değil, yardıma ihtiyaç duyan insanlara ulaşmak için de varmış.
+
+Şehir halkı Emir'e teşekkür etmek için büyük bir şenlik düzenlemiş.
+
+Meydanda şarkılar söylenmiş, rengârenk fenerler yakılmış.
+
+Emir yeni arkadaşlarıyla vedalaştıktan sonra uçan halısına binmiş.
+
+Halı onu yıldızlarla dolu gökyüzüne yükseltmiş.
+
+Gece boyunca dağların ve ormanların üzerinden uçmuş.
+
+Sabahın ilk ışıklarıyla kendi kasabasına ulaşmış.
+
+Annesi onu görünce sevinçle sarılmış.
+
+"Neredeydin oğlum? Seni çok merak ettim!"
+
+Emir gülümseyerek cevap vermiş:
+
+"Çok uzaklara gittim anneciğim. Ama en değerli şeyin uzak ülkelerdeki hazineler olmadığını öğrendim."
+
+Annesi merakla sormuş:
+
+"Peki neymiş?"
+
+Emir cevap vermiş:
+
+"Birlikte yaptığımız iyilikler ve kurduğumuz dostluklar."
+
+O günden sonra Emir, uçan halısını yalnızca macera yaşamak için değil, yardıma ihtiyaç duyanlara ulaşmak için kullanmış.
+
+Bazen kaybolan bir yolcuya yol göstermiş, bazen uzak köylere yiyecek taşımış, bazen de yalnızca bir çocuğun yüzünü güldürmüş.
+
+Ve her yolculuğunda anlamış ki gerçek sihir, halının uçmasında değil, insanların birbirine iyilik yapmasındaymış.
+
+Gökten üç elma düşmüş: Biri iyilik yapanlara, biri dostluğa değer verenlere, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+sihirli_nar_agaci: {
+    baslik: "Sihirli Nar Ağacı",
+    metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, Anadolu'nun yemyeşil dağları arasında küçük bir köy varmış.
+
+Bu köyde Zeynep adında meraklı, çalışkan ve iyi kalpli bir kız yaşarmış. Zeynep, annesi ve büyükannesiyle birlikte küçük bir evde otururmuş. Evin önünde rengârenk çiçeklerle dolu bir bahçeleri varmış.
+
+Zeynep en çok büyükannesinin anlattığı eski masalları dinlemeyi severmiş.
+
+Bir akşam büyükannesi ona ormanın derinliklerinde bulunan gizemli bir nar ağacından söz etmiş.
+
+"Bu ağaç sıradan bir ağaç değildir," demiş. "Dallarındaki narlar güneş gibi parlar. Söylentiye göre bu narlar, kalbi temiz insanların dileklerini gerçekleştirebilir."
+
+Zeynep heyecanla sormuş:
+
+"Gerçekten mi büyükanne? Peki bu ağacı hiç gören olmuş mu?"
+
+Büyükannesi gülümsemiş.
+
+"Çok eskiden bazı yolcular gördüklerini anlatırmış. Fakat ağacın yerini herkes bulamazmış."
+
+Zeynep o gece uzun süre uyuyamamış. Aklında hep kırmızı narlarla dolu o büyülü ağaç varmış.
+
+Ertesi sabah erkenden kalkmış. Çantasına biraz ekmek, peynir ve bir matara su koymuş.
+
+Annesine ve büyükannesine nereye gideceğini söyleyip izinlerini almış. Sonra ormana doğru yola çıkmış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş.
+
+Yol boyunca kuşların sesini dinlemiş, rengârenk çiçekleri seyretmiş.
+
+Bir süre sonra ormanın içinde küçük bir dereye ulaşmış.
+
+Derenin kenarında susuzluktan bitkin düşmüş bir tavşan görmüş.
+
+Tavşan suya ulaşmaya çalışıyor ama kaygan taşlardan dolayı dereye yaklaşamıyormuş.
+
+Zeynep hemen yanına gitmiş.
+
+"Korkma küçük dostum, sana yardım edeceğim," demiş.
+
+Matarasının kapağına biraz su doldurup tavşanın önüne koymuş.
+
+Tavşan suyu içtikten sonra canlanmış.
+
+Zeynep gülümseyerek yoluna devam etmiş.
+
+Biraz ileride karşısına ikiye ayrılan bir patika çıkmış.
+
+Hangi yoldan gideceğini bilememiş.
+
+Tam o sırada az önce yardım ettiği tavşan çalıların arasından çıkmış.
+
+Tavşan birkaç adım ilerleyip sağdaki patikaya doğru koşmuş.
+
+Sonra durup Zeynep'e bakmış.
+
+Zeynep şaşkınlıkla:
+
+"Yolu bana mı gösteriyorsun?" diye sormuş.
+
+Tavşan kulaklarını oynatıp yeniden koşmaya başlamış.
+
+Zeynep de onu takip etmiş.
+
+Bir süre sonra ormanın ortasında küçük bir açıklığa ulaşmışlar.
+
+Burada yaşlı bir kadın oturuyormuş.
+
+Kadının önünde içi elmalarla dolu ağır bir sepet varmış.
+
+Kadın sepeti kaldırmaya çalışıyor ama başaramıyormuş.
+
+Zeynep hemen yanına yaklaşmış.
+
+"Size yardım edebilir miyim?" diye sormuş.
+
+Yaşlı kadın sevinçle gülümsemiş.
+
+"Çok sevinirim evladım. Sepetimi şu kulübeye kadar taşımama yardım eder misin?"
+
+Zeynep sepetin bir ucundan tutmuş.
+
+Birlikte kulübeye kadar yürümüşler.
+
+Yaşlı kadın teşekkür ederek Zeynep'e küçük, işlemeli bir mendil vermiş.
+
+"Bu mendili sakla," demiş. "Belki yolculuğunda sana yardımcı olur."
+
+Zeynep teşekkür edip mendili çantasına koymuş.
+
+Sonra yaşlı kadına sormuş:
+
+"Ben sihirli nar ağacını arıyorum. Acaba nerede olduğunu biliyor musunuz?"
+
+Kadın bir süre sessiz kalmış.
+
+Ardından ormanın en yüksek tepesini işaret etmiş.
+
+"O ağacı bulmak istiyorsan güneşin son ışıklarını takip et. Ama unutma, ağacın sırrı yalnızca onu bulanlara değil, onu anlayanlara açılır."
+
+Zeynep bu sözlerin ne anlama geldiğini tam olarak anlayamamış.
+
+Yine de teşekkür edip yoluna devam etmiş.
+
+Öğleden sonra hava yavaş yavaş değişmeye başlamış.
+
+Rüzgâr güçlenmiş, bulutlar gökyüzünü kaplamış.
+
+Zeynep yağmur başlamadan tepeye ulaşmak istemiş.
+
+Fakat birden ayağı kaymış ve çamurlu bir yamaçtan aşağı düşmüş.
+
+Neyse ki ciddi bir şey olmamış.
+
+Yalnızca çantasındaki yiyecekler yere saçılmış.
+
+Zeynep üzülmüş.
+
+Tam yiyeceklerini toplamaya çalışırken küçük bir kirpi yanına gelmiş.
+
+Kirpi, yuvarlanıp çalılıkların arasına giden ekmek parçasını burnuyla iterek Zeynep'e doğru getirmiş.
+
+Zeynep gülümsemiş.
+
+"Teşekkür ederim küçük arkadaşım!"
+
+Yiyeceklerini topladıktan sonra yoluna devam etmiş.
+
+Akşam yaklaşırken gökyüzündeki bulutlar dağılmış.
+
+Güneşin altın renkli ışıkları ağaçların arasından süzülmeye başlamış.
+
+Zeynep yaşlı kadının sözlerini hatırlamış.
+
+"Güneşin son ışıklarını takip et..."
+
+Işığın geldiği yöne doğru yürümüş.
+
+Bir süre sonra karşısına büyüleyici bir manzara çıkmış.
+
+Ormanın ortasında kocaman bir nar ağacı duruyormuş!
+
+Ağacın gövdesi yaşlı ve güçlüymüş. Dalları gökyüzüne uzanıyor, yaprakları altın ışıklarla parlıyormuş.
+
+Dallarında yüzlerce kırmızı nar varmış.
+
+Bazıları öyle parlakmış ki içlerinde küçük yıldızlar saklanıyormuş gibi görünüyormuş.
+
+Zeynep hayranlıkla ağaca yaklaşmış.
+
+"Demek gerçekten varsın!" diye fısıldamış.
+
+Tam o sırada ağacın yaprakları hafifçe kıpırdamış.
+
+Derinden gelen yumuşak bir ses duyulmuş.
+
+"Hoş geldin Zeynep."
+
+Zeynep şaşkınlıkla etrafına bakmış.
+
+"Kim konuştu?"
+
+Ses yeniden duyulmuş.
+
+"Ben, Sihirli Nar Ağacı."
+
+Zeynep gözlerine inanamamış.
+
+"Sen konuşabiliyor musun?"
+
+Ağaç gülümser gibi dallarını sallamış.
+
+"Bu ormanda her canlının anlatacak bir hikâyesi vardır. Yeter ki dinlemeyi bil."
+
+Zeynep heyecanla sormuş:
+
+"Senin narlarının dilekleri gerçekleştirdiği doğru mu?"
+
+Ağaç cevap vermiş:
+
+"Evet, ama her dilek gerçekleşmez."
+
+Zeynep meraklanmış.
+
+"Neden?"
+
+"Çünkü bazı dilekler yalnızca isteyen kişiyi mutlu eder. Benim narlarım ise başkalarının hayatına da iyilik getiren dilekleri sever."
+
+Zeynep bir süre düşünmüş.
+
+Aslında buraya gelirken kendisi için güzel kıyafetler, oyuncaklar ve büyük bir ev dilemek istemiş.
+
+Fakat yol boyunca karşılaştığı canlıları hatırlamış.
+
+Susuz tavşanı, ağır sepet taşıyan yaşlı kadını ve kendisine yardım eden küçük kirpiyi düşünmüş.
+
+Sonra kendi köyünü hatırlamış.
+
+O yıl yağmurlar az yağmış, köyün tarlaları kurumuşmuş.
+
+Bazı aileler ürün yetiştirmekte zorlanıyormuş.
+
+Zeynep başını kaldırmış.
+
+"Bir dileğim var," demiş.
+
+Ağaç sormuş:
+
+"Nedir dileğin?"
+
+Zeynep cevap vermiş:
+
+"Köyümüzdeki toprakların yeniden bereketli olmasını istiyorum. Herkesin sofrasında yiyecek olsun. Bahçelerimiz yeniden çiçek açsın."
+
+Ağaç bir süre sessiz kalmış.
+
+Sonra dallarından biri yavaşça aşağı eğilmiş.
+
+Üzerindeki en parlak nar Zeynep'in önüne düşmüş.
+
+"Bu narı al," demiş ağaç. "Ama onu yalnızca kendin için saklama."
+
+Zeynep narı dikkatlice eline almış.
+
+"Ne yapmalıyım?"
+
+"Narın tanelerini köyündeki insanlarla paylaş. Herkes bir tanesini toprağa eksin ve ona özenle baksın."
+
+Zeynep teşekkür etmiş.
+
+Sonra köyüne dönmek üzere yola çıkmış.
+
+Dönüş yolunda daha önce karşılaştığı tavşanı yeniden görmüş.
+
+Tavşan onu güvenli patikaya kadar takip etmiş.
+
+Yaşlı kadının verdiği mendil de yağmurdan ıslanan ellerini kurutmasına yardımcı olmuş.
+
+Zeynep gece olmadan köyüne ulaşmış.
+
+Annesi ve büyükannesi onu sevinçle karşılamış.
+
+Zeynep başından geçenleri anlatmış.
+
+Ertesi sabah köy meydanında herkes toplanmış.
+
+Zeynep narı dikkatlice açmış.
+
+İçinden parlak kırmızı taneler çıkmış.
+
+Narın tanelerini köydeki ailelerle paylaşmış.
+
+Herkes kendi bahçesine birer tane ekmiş.
+
+Günler geçmiş.
+
+Köylüler toprağı sulamış, yabani otları temizlemiş ve küçük filizleri korumuş.
+
+Bir süre sonra bahçelerde yemyeşil nar fidanları büyümeye başlamış.
+
+Fidanlar zamanla güçlenmiş.
+
+Köyün sokakları yeniden yeşillenmiş.
+
+İnsanlar birlikte çalıştıkça yalnızca bahçeleri değil, dostlukları da güzelleşmiş.
+
+Bir gün büyükannesi Zeynep'e sormuş:
+
+"Sence nar ağacının gerçek sihri neydi?"
+
+Zeynep düşünmüş.
+
+Sonra gülümseyerek cevap vermiş:
+
+"Sanırım sihir yalnızca narın içinde değildi. Hepimizin birlikte çalışmasında, paylaşmasında ve birbirimize yardım etmesindeydi."
+
+Büyükannesi başını sallamış.
+
+"İşte ağacın sırrını şimdi anlamışsın."
+
+O günden sonra köyde her yıl nar hasadı zamanı büyük bir şenlik düzenlenmiş.
+
+İnsanlar yetiştirdikleri narları komşularıyla paylaşmış.
+
+Çocuklar da Zeynep'in hikâyesini dinleyerek büyümüş.
+
+Ve herkes öğrenmiş ki en güzel dilekler, yalnızca kendimiz için değil, başkalarının mutluluğu için de kurduklarımızmış.
+
+Gökten üç nar düşmüş: Biri iyilik yapanlara, biri paylaşmayı bilenlere, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+buyulu_geyik: {
+    baslik: "Büyülü Geyiğin Sırrı",
+    metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, yemyeşil dağların arasında, kuş sesleriyle dolu küçük bir köy varmış.
+
+Bu köyde Defne adında meraklı, cesur ve doğayı çok seven bir kız yaşarmış.
+
+Defne, köyün hemen yanındaki ormanda yürüyüş yapmayı çok severmiş. Ağaçların yapraklarını, rengârenk çiçekleri ve küçük hayvanların izlerini incelemek en büyük eğlencesiymiş.
+
+Büyükannesi ona her zaman:
+
+"Orman yalnızca ağaçlardan oluşmaz Defne. Orada yaşayan her canlının bir görevi vardır. Doğayı korursan o da sana güzelliklerini gösterir," dermiş.
+
+Defne büyükannesinin bu sözlerini hiç unutmazmış.
+
+Bir sabah erkenden kalkmış, küçük çantasına biraz ekmek ve su koymuş. Annesine haber vererek ormanın kenarına doğru yürümeye başlamış.
+
+Hava çok güzelmiş.
+
+Güneş ağaçların arasından süzülüyor, kuşlar dallarda neşeyle ötüyormuş.
+
+Defne yürürken birden uzaklardan gelen ince bir ses duymuş.
+
+Sanki biri yardım istiyormuş.
+
+Sesin geldiği yöne doğru ilerlemiş.
+
+Bir süre sonra çalıların arasında sıkışmış küçük bir tilki yavrusu görmüş.
+
+Tilki kurtulmaya çalışıyor ama dikenli dallar hareket etmesini engelliyormuş.
+
+Defne dikkatlice eğilmiş.
+
+"Korkma küçük dostum. Sana yardım edeceğim," demiş.
+
+Dalları yavaşça kenara çekerek tilkiyi kurtarmış.
+
+Tilki yavrusu birkaç adım uzaklaşmış, sonra dönüp Defne'ye bakmış.
+
+Sanki teşekkür ediyormuş gibi kuyruğunu sallamış.
+
+Defne gülümseyerek yoluna devam etmiş.
+
+Fakat biraz ilerlediğinde ormanda tuhaf bir şey fark etmiş.
+
+Kuş sesleri azalmış, çiçeklerin bazıları solmaya başlamış.
+
+Ağaçların yaprakları da eskisi kadar canlı görünmüyormuş.
+
+Defne endişelenmiş.
+
+"Ormana ne oluyor böyle?" diye kendi kendine sormuş.
+
+Tam o sırada ağaçların arasından altın renkli bir ışık yükselmiş.
+
+Defne ışığın geldiği yöne doğru yürümüş.
+
+Bir açıklığa ulaştığında gözlerine inanamamış.
+
+Karşısında olağanüstü güzellikte bir geyik duruyormuş.
+
+Geyiğin kahverengi tüyleri güneş ışığında parlıyor, boynuzlarından küçük altın yıldızlar süzülüyormuş.
+
+Boynuzlarının arasında pembe çiçekler açmış.
+
+Defne hayranlıkla bakakalmış.
+
+"Sen ne kadar güzelsin!" diye fısıldamış.
+
+Geyik başını hafifçe eğmiş.
+
+"Hoş geldin Defne. Seni bekliyordum," demiş.
+
+Defne şaşkınlıkla geri çekilmiş.
+
+"Sen... konuşabiliyor musun?"
+
+Geyik gülümsemiş.
+
+"Ben bu ormanın koruyucusuyum. Adım Işık."
+
+Defne merakla sormuş:
+
+"Peki beni neden bekliyordun?"
+
+Işık derin bir nefes almış.
+
+"Ormanımız büyük bir tehlikeyle karşı karşıya. Büyülü Yaşam Pınarı'nın suyu azalmaya başladı."
+
+Defne şaşırmış.
+
+"Yaşam Pınarı mı?"
+
+Geyik başını sallamış.
+
+"Ormanın bütün canlıları o pınarın suyuyla güçlenir. Çiçekler açar, ağaçlar büyür, hayvanlar yaşamlarını sürdürür. Fakat pınara giden yol büyük kayalarla kapandı."
+
+Defne hemen sormuş:
+
+"Kim kapattı o yolu?"
+
+Işık cevap vermiş:
+
+"Geçen hafta büyük bir fırtına çıktı. Dağlardan kopan kayalar suyun yolunu kapattı. Pınar hâlâ akıyor ama su ormana ulaşamıyor."
+
+Defne düşünmüş.
+
+"Öyleyse kayaları kaldırmamız gerekiyor!"
+
+Geyik başını sallamış.
+
+"Ama bunu tek başımıza yapamayız. Ormandaki canlıların yardımına ihtiyacımız var."
+
+Defne kararlılıkla:
+
+"O zaman hepsinden yardım isteyelim!" demiş.
+
+Böylece Defne ve büyülü geyik birlikte yola çıkmışlar.
+
+Önce büyük meşe ağacının yanına gitmişler.
+
+Burada sincaplar yaşıyormuş.
+
+Defne sincaplara durumu anlatmış.
+
+Sincapların en büyüğü:
+
+"Biz küçük taşları ve dalları temizleyebiliriz," demiş.
+
+Sonra ormanın derinliklerine ilerlemişler.
+
+Bir grup tavşanla karşılaşmışlar.
+
+Tavşanlar da yardım etmeyi kabul etmiş.
+
+"Biz toprağı kazabilir, suyun geçeceği küçük yollar açabiliriz," demişler.
+
+Daha sonra bir kuş sürüsüne rastlamışlar.
+
+Kuşlar gökyüzüne yükselmiş.
+
+"Biz de yukarıdan yolu inceleyip en uygun geçidi bulabiliriz!" diye seslenmişler.
+
+Defne çok mutlu olmuş.
+
+"Birlikte başarabiliriz!" demiş.
+
+Akşamüstüne doğru bütün hayvanlar Yaşam Pınarı'nın bulunduğu yere ulaşmış.
+
+Pınarın önünde büyük kayalar, kırılmış dallar ve çamur birikmiş.
+
+Su yalnızca küçük bir aralıktan sızabiliyormuş.
+
+Defne manzarayı görünce üzülmüş.
+
+"Bu kadar büyük kayaları nasıl kaldıracağız?"
+
+Işık sakince cevap vermiş:
+
+"Önemli olan her şeyi bir anda başarmak değil, birlikte küçük adımlar atmaktır."
+
+Böylece çalışmaya başlamışlar.
+
+Sincaplar küçük dalları taşımış.
+
+Tavşanlar toprağı kazmış.
+
+Kuşlar yukarıdan suyun geçebileceği yolları göstermiş.
+
+Defne de yerdeki taşları dikkatlice toplamış.
+
+Işık güçlü boynuzlarıyla büyük dalları kenara itmiş.
+
+Saatler boyunca çalışmışlar.
+
+Fakat pınarın önündeki en büyük kaya bir türlü hareket etmiyormuş.
+
+Defne yorulmuş.
+
+"Sanırım başaramayacağız," demiş.
+
+Tam o sırada çalıların arasından küçük bir tilki çıkmış.
+
+Bu, Defne'nin sabah kurtardığı tilki yavrusuymuş!
+
+Arkasında annesi ve başka tilkiler de varmış.
+
+Tilki yavrusu neşeyle Defne'ye yaklaşmış.
+
+Işık gülümsemiş.
+
+"Görünüşe göre yeni yardımcılarımız geldi."
+
+Tilkiler kayanın yanındaki yumuşak toprağı kazmaya başlamış.
+
+Tavşanlar da onlara katılmış.
+
+Bir süre sonra kayanın altındaki toprak gevşemiş.
+
+Defne ve Işık kayayı dikkatlice itmişler.
+
+Kaya yavaşça yerinden oynamış.
+
+Sonunda büyük bir gürültüyle yana doğru yuvarlanmış.
+
+O anda pınarın suyu yeniden akmaya başlamış!
+
+Berrak su küçük dereler oluşturarak ormanın içine yayılmış.
+
+Kuruyan çiçekler yavaşça doğrulmuş.
+
+Ağaçların yaprakları canlanmış.
+
+Kuşlar yeniden şarkı söylemeye başlamış.
+
+Orman eski neşesine kavuşmuş.
+
+Defne sevinçle ellerini çırpmış.
+
+"Başardık! Hep birlikte başardık!"
+
+Işık'ın boynuzları her zamankinden daha parlak ışıldamış.
+
+Geyik Defne'ye yaklaşmış.
+
+"Bugün ormanımızı kurtardın," demiş.
+
+Defne başını sallamış.
+
+"Hayır, hepimiz kurtardık. Herkes kendi yapabildiği kadar yardım etti."
+
+Işık gülümsemiş.
+
+"İşte ormanın en büyük sırrını öğrendin."
+
+Defne merakla sormuş:
+
+"Neymiş o?"
+
+Geyik cevap vermiş:
+
+"Gerçek büyü, tek bir canlının gücünde değil, bütün canlıların birbirine destek olmasındadır."
+
+Sonra boynuzlarının arasındaki küçük çiçeklerden biri yavaşça yere düşmüş.
+
+Çiçek altın renkli bir ışıkla parlıyormuş.
+
+Işık çiçeği Defne'ye uzatmış.
+
+"Bu çiçek sana bugün öğrendiklerini hatırlatsın. Ne zaman doğayı korursan, ne zaman bir canlıya yardım edersen, ormanın dostu olmaya devam edeceksin."
+
+Defne çiçeği dikkatlice almış.
+
+"Teşekkür ederim Işık. Seni hiç unutmayacağım."
+
+Geyik başını eğmiş.
+
+"Ben de seni unutmayacağım Defne."
+
+Güneş batmak üzereymiş.
+
+Defne köyüne dönmek için yola çıkmış.
+
+Ormandan ayrılırken arkasına dönüp son kez bakmış.
+
+Işık, ağaçların arasında duruyor ve altın renkli boynuzlarıyla ona veda ediyormuş.
+
+Defne eve ulaştığında büyükannesi onu kapıda karşılamış.
+
+"Bugün ormanda neler yaptın bakalım?" diye sormuş.
+
+Defne heyecanla bütün macerasını anlatmış.
+
+Büyükannesi gülümsemiş.
+
+"Demek ormanın sırrını öğrendin."
+
+Defne şaşırmış.
+
+"Sen Işık'ı biliyor muydun büyükanne?"
+
+Büyükannesi göz kırpmış.
+
+"Belki de ben küçükken onunla karşılaşmışımdır."
+
+Defne gülmeye başlamış.
+
+O günden sonra köydeki çocuklarla birlikte ormanı korumaya daha çok özen göstermiş.
+
+Çöpleri toplamışlar, fidanlar dikmişler ve hayvanların yaşam alanlarına zarar vermemişler.
+
+Defne bazen ormanın derinliklerinden altın renkli bir ışık yükseldiğini görürmüş.
+
+O zaman gülümseyerek:
+
+"Merhaba Işık!" diye fısıldarmış.
+
+Ve bilirmiş ki büyülü geyik, ormanın bütün canlılarını korumaya devam ediyormuş.
+
+Gökten üç elma düşmüş: Biri doğayı sevenlere, biri yardımlaşmayı bilenlere, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+sihirli_yunus: {
+    baslik: "Denizin Sihirli Yunusu",
+      metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, masmavi denizin kıyısında küçük ve güzel bir kasaba varmış.
+
+Bu kasabada Deniz adında meraklı, cesur ve doğayı çok seven bir kız yaşarmış.
+
+Deniz, ailesiyle birlikte denize bakan küçük bir evde otururmuş. Evin penceresinden her sabah güneşin denizin üzerinde parlayışını izler, dalgaların sesini dinlermiş.
+
+En büyük hayali denizin derinliklerinde neler olduğunu öğrenmekmiş.
+
+Büyükbabası eskiden balıkçıymış. Deniz'e her akşam denizle ilgili hikâyeler anlatırmış.
+
+Bir gün büyükbabası ona:
+
+"Deniz yalnızca gördüğümüz mavi sulardan ibaret değildir. Onun altında binlerce canlı yaşar. Her birinin bu dünyada önemli bir yeri vardır," demiş.
+
+Deniz bu sözleri hiç unutmamış.
+
+Bir sabah erkenden sahile gitmiş.
+
+Hava çok güzelmiş. Güneş yeni doğuyor, martılar gökyüzünde uçuyor, küçük dalgalar kıyıya vuruyormuş.
+
+Deniz sahilde yürürken kumların arasında parlayan küçük bir deniz kabuğu görmüş.
+
+Kabuğu eline almış.
+
+Üzerinde yıldızlara benzeyen altın renkli desenler varmış.
+
+Tam o sırada denizden ince bir ses yükselmiş.
+
+"Merhaba Deniz!"
+
+Deniz şaşkınlıkla etrafına bakmış.
+
+"Kim konuştu?" diye sormuş.
+
+Birden suyun içinden gri ve gümüş renkli, çok güzel bir yunus çıkmış.
+
+Yunusun sırtında küçük yıldızlar gibi parlayan desenler varmış.
+
+Deniz hayranlıkla ona bakmış.
+
+"Sen ne kadar güzelsin!" demiş.
+
+Yunus neşeyle suyun üzerinde sıçramış.
+
+"Benim adım Mercan," demiş.
+
+Deniz gözlerine ve kulaklarına inanamamış.
+
+"Sen konuşabiliyor musun?"
+
+Mercan gülümsemiş.
+
+"Evet. Ben bu denizin koruyucularından biriyim."
+
+Deniz heyecanla sormuş:
+
+"Peki beni nereden tanıyorsun?"
+
+Mercan cevap vermiş:
+
+"Çünkü sen denizi seven ve onun canlılarına zarar vermeyen bir çocuksun. Sana anlatmam gereken önemli bir sır var."
+
+Deniz merakla yaklaşmış.
+
+"Nasıl bir sır?"
+
+Mercan derin bir nefes almış.
+
+"Denizin altında çok eski bir Mercan Bahçesi bulunuyor. Bu bahçe, denizde yaşayan pek çok canlının yuvası. Fakat son zamanlarda bahçemiz zarar görmeye başladı."
+
+Deniz endişelenmiş.
+
+"Neden?"
+
+Mercan üzgün bir sesle:
+
+"Denize bırakılan çöpler ve kaybolan balıkçı ağları yüzünden bazı canlılar yuvalarına ulaşamıyor. Bahçedeki mercanların çevresi de kirleniyor," demiş.
+
+Deniz hemen sormuş:
+
+"Peki sana nasıl yardım edebilirim?"
+
+Mercan gülümsemiş.
+
+"Önce denizin bize anlatmak istediklerini görmelisin."
+
+Yunus kuyruğunu hafifçe hareket ettirmiş.
+
+O anda Deniz'in elindeki deniz kabuğu parlamaya başlamış.
+
+Kabuğun içinden küçük ışıklar yükselmiş.
+
+Deniz şaşkınlıkla geri çekilmiş.
+
+"Bu da ne?"
+
+Mercan cevap vermiş:
+
+"Bu, denizin sihirli kabuğu. Sana suyun altındaki dünyayı gösterecek."
+
+Bir anda kabuğun üzerinde küçük, ışıklı bir görüntü belirmiş.
+
+Deniz görüntüde rengârenk balıkları, denizyıldızlarını, deniz kaplumbağalarını ve mercanları görmüş.
+
+Fakat biraz ileride bazı mercanların çevresinde plastik parçaları ve eski ağlar varmış.
+
+Küçük bir deniz kaplumbağası da ağa takılmış gibi görünüyormuş.
+
+Deniz üzülmüş.
+
+"Bu canlılara yardım etmeliyiz!"
+
+Mercan başını sallamış.
+
+"Ben ve denizdeki arkadaşlarım elimizden geleni yapıyoruz. Ama kıyıdaki insanların da bize yardım etmesi gerekiyor."
+
+Deniz düşünmeye başlamış.
+
+Sonra aklına bir fikir gelmiş.
+
+"Kasabadaki insanlara denizin durumunu anlatabilirim!"
+
+Mercan sevinmiş.
+
+"İşte buna ihtiyacımız var!"
+
+Deniz hemen eve koşmuş.
+
+Büyükbabasına gördüklerini anlatmış.
+
+Büyükbabası dikkatle dinlemiş.
+
+"Denizin korunması için hepimizin sorumluluk alması gerekiyor," demiş.
+
+Deniz sormuş:
+
+"Peki ne yapabiliriz?"
+
+Büyükbabası gülümsemiş.
+
+"Önce kıyılarımızı temizleyebiliriz. Sonra da balıkçılarla konuşup kaybolan ağları yetkililere bildirmelerini isteyebiliriz."
+
+Deniz çok heyecanlanmış.
+
+Ertesi sabah arkadaşlarını toplamış.
+
+Onlara deniz canlılarının yaşadığı sorunları anlatmış.
+
+Arkadaşları da yardım etmeyi kabul etmiş.
+
+Hep birlikte büyüklerin gözetiminde sahilde bir temizlik etkinliği düzenlemişler.
+
+Eldivenlerini takmış, uygun çöp torbalarını hazırlamışlar.
+
+Kumların arasındaki plastik şişeleri, kâğıtları ve diğer çöpleri toplamışlar.
+
+Deniz, arkadaşlarına:
+
+"Çöpleri denize atmazsak burada yaşayan canlıların yuvalarını da korumuş oluruz," demiş.
+
+Çocuklar gün boyunca çalışmış.
+
+Sahil giderek temizlenmiş.
+
+Kasabadaki insanlar onları görünce çok mutlu olmuş.
+
+Bazı aileler de temizliğe katılmış.
+
+Balıkçılar, denizde gördükleri terk edilmiş ağları yetkililere haber vermeye başlamış.
+
+Bir süre sonra kasabanın sahili eskisinden daha temiz hâle gelmiş.
+
+Fakat Deniz'in aklında hâlâ Mercan Bahçesi varmış.
+
+Bir akşam yine sahile gitmiş.
+
+Elindeki sihirli deniz kabuğunu güneşe doğru kaldırmış.
+
+"Mercan, beni duyabiliyor musun?" diye seslenmiş.
+
+Bir süre sonra denizden tanıdık bir ses gelmiş.
+
+"Elbette duyabiliyorum Deniz!"
+
+Mercan suyun içinden neşeyle çıkmış.
+
+Deniz sevinçle:
+
+"Arkadaşlarımla birlikte sahili temizledik!" demiş.
+
+Mercan başını sallamış.
+
+"Biliyorum. Denizdeki dostlarım da bunu fark etti."
+
+Deniz merakla sormuş:
+
+"Peki Mercan Bahçesi nasıl?"
+
+Mercan cevap vermiş:
+
+"Henüz tamamen iyileşmedi. Ama daha iyiye gidiyor. Sana göstermek istediğim bir şey var."
+
+Yunus suyun üzerinde küçük bir daire çizmiş.
+
+Deniz'in elindeki sihirli kabuk yeniden parlamış.
+
+Kabuğun üzerinde Mercan Bahçesi'nin görüntüsü belirmiş.
+
+Rengârenk balıklar mercanların arasında yüzüyormuş.
+
+Daha önce ağa takıldığını gördüğü kaplumbağa artık özgürce hareket ediyormuş.
+
+Deniz çok sevinmiş.
+
+"Kaplumbağa kurtulmuş!"
+
+Mercan gülümsemiş.
+
+"Evet. Deniz canlılarını korumak için çalışan görevliler ona yardım etti."
+
+Deniz rahat bir nefes almış.
+
+"Çok mutlu oldum!"
+
+Mercan bir süre sessiz kalmış.
+
+Sonra:
+
+"Fakat sana söylemem gereken bir şey daha var," demiş.
+
+Deniz meraklanmış.
+
+"Nedir?"
+
+Mercan cevap vermiş:
+
+"Denizi korumak yalnızca bir gün yapılan bir iş değildir. Her gün dikkatli olmak gerekir."
+
+Deniz başını sallamış.
+
+"Haklısın. Bundan sonra da arkadaşlarımla birlikte sahilimizi temiz tutacağız."
+
+Mercan sevinçle suyun üzerinde sıçramış.
+
+O anda denizin yüzeyinde küçük altın ışıklar belirmiş.
+
+Işıklar dalgaların üzerinde dans etmeye başlamış.
+
+Deniz hayranlıkla onları izlemiş.
+
+"Bu ışıklar da ne?"
+
+Mercan cevap vermiş:
+
+"Bunlar denizin teşekkür yıldızları. Denizi korumak için çalışan insanların iyiliğini hatırlatırlar."
+
+Deniz gülümsemiş.
+
+"Benim için en güzel teşekkür, denizdeki canlıların güvende olması."
+
+Mercan başını eğmiş.
+
+"İşte bu yüzden sen gerçek bir deniz dostusun."
+
+Güneş yavaşça batmaya başlamış.
+
+Gökyüzü pembe, turuncu ve mor renklere bürünmüş.
+
+Deniz, Mercan'la vedalaşmış.
+
+"Yarın yine gelir misin?" diye sormuş.
+
+Mercan gülümsemiş.
+
+"Belki beni her zaman göremezsin. Ama dalgaların sesini dinlediğinde burada olduğumu hatırlayabilirsin."
+
+Sonra suya dalmış ve gözden kaybolmuş.
+
+Deniz uzun süre kıyıda oturmuş.
+
+Elindeki deniz kabuğuna bakmış.
+
+Artık denizin ne kadar değerli olduğunu daha iyi anlıyormuş.
+
+O günden sonra Deniz ve arkadaşları, kasabalarında denizi korumak için küçük bir topluluk kurmuşlar.
+
+Sahillerini temiz tutmuş, çevrelerindeki insanları bilinçlendirmiş ve deniz canlılarına zarar verebilecek durumları büyüklerine haber vermişler.
+
+Kasabanın çocukları her yıl deniz şenliği düzenlemeye başlamış.
+
+Bu şenlikte deniz canlılarının resimlerini çiziyor, çevreyi korumayla ilgili hikâyeler anlatıyorlarmış.
+
+Deniz bazen gün batımında sahile gidip dalgaları izlermiş.
+
+Uzaklarda suyun üzerinde sıçrayan bir yunus gördüğünde gülümsermiş.
+
+Çünkü Mercan'ın onu unutmadığını bilirmiş.
+
+Ve her zaman hatırlarmış ki denizin en büyük sihri, içinde barındırdığı yaşam ve bu yaşamı korumak için gösterilen sevgide saklıymış.
+
+Gökten üç deniz yıldızı düşmüş: Biri doğayı koruyanlara, biri dostluğa değer verenlere, biri de bu masalı dinleyenlere.
+
+Onlar ermiş muradına, biz çıkalım kerevetine.`
+},
+
+ay_isiginin_anahtari: {
+    baslik: "Ay Işığının Anahtarı",
+  metin: `Bir varmış, bir yokmuş. Evvel zaman içinde, kalbur saman içinde, yıldızların gökyüzünü pırıl pırıl aydınlattığı uzak bir ülkede küçük ve güzel bir köy varmış.
+
+Bu köyde Luna adında meraklı, cesur ve hayal kurmayı çok seven bir kız yaşarmış.
+
+Luna, ailesiyle birlikte çiçeklerle çevrili küçük bir evde otururmuş. Geceleri penceresinden gökyüzünü izlemek en sevdiği şeymiş.
+
+Yıldızları sayar, ayın şekillerini inceler ve gökyüzünün ardında nasıl sırlar saklandığını merak edermiş.
+
+Büyükannesi ona sık sık:
+
+"Unutma Luna, bazen en karanlık gecelerde bile yolumuzu gösterecek küçük bir ışık vardır," dermiş.
+
+Luna bu sözleri çok severmiş.
+
+Bir gece gökyüzünde kocaman, parlak bir dolunay varmış.
+
+Ay ışığı bahçedeki çiçeklerin üzerine gümüş renkli bir örtü gibi seriliyormuş.
+
+Luna tam uyumaya hazırlanırken penceresinden tuhaf bir ışık görmüş.
+
+Bahçenin ortasında küçük bir şey parlıyormuş.
+
+Merakla dışarı çıkmış.
+
+Çiçeklerin arasında altın renkli, üzerinde yıldız desenleri bulunan eski bir anahtar duruyormuş.
+
+Luna anahtarı eline almış.
+
+O anda anahtarın üzerindeki yıldızlar parlamaya başlamış.
+
+Birden gökyüzünden yumuşak bir ses duyulmuş.
+
+"Merhaba Luna."
+
+Luna şaşkınlıkla etrafına bakmış.
+
+"Kim konuşuyor?" diye sormuş.
+
+Ses yeniden duyulmuş.
+
+"Ben Ay Işığı'nın sesiyim. Elindeki anahtar seni önemli bir sırrın kapısına götürecek."
+
+Luna heyecanlanmış.
+
+"Nasıl bir sır?"
+
+Ses cevap vermiş:
+
+"Bunu öğrenmek istiyorsan ay ışığını takip et. Ama unutma, her kapı yalnızca bir anahtarla açılmaz."
+
+Luna anahtarı dikkatlice çantasına koymuş.
+
+Ertesi sabah büyükannesine gördüklerini anlatmış.
+
+Büyükannesi onu dikkatle dinlemiş.
+
+"Belki de bu anahtar, eski masallarda anlatılan Yıldızlar Şatosu'na aittir," demiş.
+
+Luna şaşkınlıkla sormuş:
+
+"Yıldızlar Şatosu mu?"
+
+Büyükannesi başını sallamış.
+
+"Söylentiye göre uzak dağların ardında, yalnızca ay ışığında görülebilen büyülü bir şato vardır. Orada gökyüzünün en eski sırları saklanır."
+
+Luna heyecanla:
+
+"Ben o şatoyu bulmak istiyorum!" demiş.
+
+Büyükannesi gülümsemiş.
+
+"Öyleyse dikkatli ol. Yolculuğun boyunca karşılaştığın canlılara yardım etmeyi unutma."
+
+Luna ailesinin iznini almış, çantasına biraz yiyecek ve su koymuş.
+
+Akşam olduğunda ay ışığını takip ederek yola çıkmış.
+
+Az gitmiş, uz gitmiş; dere tepe düz gitmiş.
+
+Önce çiçeklerle dolu bir vadiden geçmiş.
+
+Sonra yüksek ağaçların bulunduğu sessiz bir ormana ulaşmış.
+
+Ormanda yürürken küçük bir baykuşun sesini duymuş.
+
+Baykuş bir ağacın dalında oturuyor, üzgün üzgün ötüyormuş.
+
+Luna yanına yaklaşmış.
+
+"Neden üzgünsün küçük baykuş?" diye sormuş.
+
+Baykuş cevap vermiş:
+
+"Yuvama dönmek istiyorum ama fırtına yüzünden yolumu kaybettim."
+
+Luna şaşırmış.
+
+"Sen de konuşabiliyor musun?"
+
+Baykuş gülümsemiş.
+
+"Bu gece ay ışığının büyüsü bütün ormana yayılmış."
+
+Luna küçük baykuşa yardım etmeye karar vermiş.
+
+Birlikte ormanın içindeki yüksek meşe ağacını aramışlar.
+
+Bir süre sonra baykuş yuvasını görmüş.
+
+Sevinçle kanatlarını çırpmış.
+
+"Teşekkür ederim Luna! İyiliğini unutmayacağım."
+
+Luna gülümsemiş.
+
+"Yuvana kavuşmana sevindim."
+
+Baykuş uçmadan önce ona küçük, gümüş renkli bir tüy vermiş.
+
+"Bu tüy karanlıkta sana yol gösterebilir," demiş.
+
+Luna tüyü çantasına koymuş.
+
+Sonra yoluna devam etmiş.
+
+Bir süre sonra karşısına büyük bir nehir çıkmış.
+
+Nehir ay ışığında gümüş gibi parlıyormuş.
+
+Fakat üzerinde hiçbir köprü yokmuş.
+
+Luna ne yapacağını düşünürken nehrin kenarında küçük bir kaplumbağa görmüş.
+
+Kaplumbağa ters dönmüş ve ayağa kalkamıyormuş.
+
+Luna hemen yanına gitmiş.
+
+Onu dikkatlice çevirerek yeniden ayaklarının üzerine koymuş.
+
+Kaplumbağa sevinmiş.
+
+"Teşekkür ederim Luna," demiş.
+
+Luna gülümsemiş.
+
+"Rica ederim."
+
+Kaplumbağa başını kaldırmış.
+
+"Nereye gidiyorsun?"
+
+Luna cevap vermiş:
+
+"Yıldızlar Şatosu'nu arıyorum. Ama bu nehri nasıl geçeceğimi bilmiyorum."
+
+Kaplumbağa nehrin biraz ilerisini işaret etmiş.
+
+"Orada büyük taşlar var. Su sığ olduğu için dikkatlice karşıya geçebilirsin."
+
+Luna teşekkür etmiş.
+
+Kaplumbağanın gösterdiği yoldan yürüyerek nehrin karşı kıyısına ulaşmış.
+
+Gece ilerledikçe ay daha da yükselmiş.
+
+Luna dağların arasından gelen parlak bir ışık görmüş.
+
+Işığa doğru yürümüş.
+
+Bir süre sonra karşısına olağanüstü bir manzara çıkmış.
+
+Yüksek bir tepenin üzerinde, duvarları gümüş renkli taşlarla örülmüş görkemli bir şato duruyormuş.
+
+Şatonun kuleleri yıldızlara kadar uzanıyor gibi görünüyormuş.
+
+Pencerelerinden mavi ve altın renkli ışıklar süzülüyormuş.
+
+Luna hayranlıkla bakmış.
+
+"Demek Yıldızlar Şatosu gerçekten varmış!"
+
+Şatonun büyük kapısına yaklaşmış.
+
+Kapının üzerinde ay ve yıldız desenleri bulunuyormuş.
+
+Ortada anahtar şeklinde küçük bir kilit varmış.
+
+Luna çantasındaki altın anahtarı çıkarmış.
+
+Kilide yerleştirmiş.
+
+Fakat kapı açılmamış.
+
+Luna şaşırmış.
+
+"Anahtar doğru değil mi acaba?"
+
+Tam o sırada kapının üzerinde parlak harfler belirmiş.
+
+"Bu kapı, cesaret ve iyilikle açılır."
+
+Luna yazıyı dikkatlice okumuş.
+
+Sonra yolculuğunu düşünmüş.
+
+Yolunu kaybeden baykuşa yardım etmiş, kaplumbağayı kurtarmış ve karşılaştığı zorluklara rağmen yoluna devam etmiş.
+
+Anahtarı yeniden çevirmiş.
+
+Bu kez kapının üzerindeki yıldızlar parlamaya başlamış.
+
+Büyük kapı yavaşça açılmış.
+
+Luna heyecanla içeri girmiş.
+
+Şatonun salonu göz kamaştırıcıymış.
+
+Tavandan küçük yıldızlara benzeyen ışıklar sarkıyor, duvarlarda gökyüzünü gösteren resimler bulunuyormuş.
+
+Salonun ortasında büyük, yuvarlak bir ayna varmış.
+
+Aynanın önünde gümüş renkli elbiseler giyen yaşlı bir kadın duruyormuş.
+
+Kadın gülümseyerek:
+
+"Hoş geldin Luna. Seni bekliyorduk," demiş.
+
+Luna şaşkınlıkla sormuş:
+
+"Beni mi bekliyordunuz?"
+
+Kadın başını sallamış.
+
+"Ben Yıldızlar Şatosu'nun koruyucusuyum. Elindeki anahtar yıllardır doğru kişiyi arıyordu."
+
+Luna meraklanmış.
+
+"Peki neden beni seçti?"
+
+Kadın cevap vermiş:
+
+"Çünkü sen yalnızca kendi yolculuğunu düşünmedin. Yardıma ihtiyaç duyan canlıları da gördün."
+
+Luna gülümsemiş.
+
+"Onlara yardım etmek istedim."
+
+Kadın onu büyük aynanın önüne götürmüş.
+
+Aynada Luna'nın yolculuğu görünmeye başlamış.
+
+Önce baykuşa yardım ettiği anı görmüş.
+
+Sonra kaplumbağayı kurtardığı sahne belirmiş.
+
+Ardından nehirden geçerken gösterdiği cesareti izlemiş.
+
+Kadın konuşmuş:
+
+"İşte anahtarın gerçek sırrı budur. Cesaret, iyilik ve umut bir araya geldiğinde en zor kapılar bile açılabilir."
+
+Luna aynaya hayranlıkla bakmış.
+
+"Peki şatoda saklanan büyük sır nedir?" diye sormuş.
+
+Kadın gülümsemiş.
+
+"İnsanların içindeki ışık."
+
+Luna şaşırmış.
+
+"İnsanların içinde ışık mı var?"
+
+Kadın başını sallamış.
+
+"Elbette. Her insanın içinde umut, sevgi ve iyilik vardır. Bazen bu ışık küçülür. Ama güzel bir söz, küçük bir yardım ya da içten bir dostluk onu yeniden büyütebilir."
+
+Luna bir süre düşünmüş.
+
+Sonra:
+
+"Demek yıldızların ışığı gibi, biz de birbirimizin hayatını aydınlatabiliriz," demiş.
+
+Kadın sevinçle gülümsemiş.
+
+"Tam olarak öyle."
+
+Sonra Luna'ya küçük, yıldız şeklinde bir kolye vermiş.
+
+"Bu kolye sana öğrendiklerini hatırlatsın. Ama unutma, gerçek ışık kolyede değil, senin kalbinde."
+
+Luna kolyeyi dikkatlice almış.
+
+"Teşekkür ederim."
+
+Şatoda biraz dinlendikten sonra köyüne dönmek için hazırlanmış.
+
+Kapıdan çıkarken arkasına dönmüş.
+
+Şato ay ışığında her zamankinden daha parlak görünüyormuş.
+
+Luna ormandan ve vadilerden geçerek evine dönmüş.
+
+Büyükannesi onu sevinçle karşılamış.
+
+"Yıldızlar Şatosu'nu bulabildin mi?" diye sormuş.
+
+Luna gülümsemiş.
+
+"Evet büyükanne. Ama orada öğrendiğim şey, şatonun kendisinden bile güzeldi."
+
+Büyükannesi merakla sormuş:
+
+"Neymiş o?"
+
+Luna cevap vermiş:
+
+"Her insanın içinde başkalarının hayatını aydınlatabilecek bir ışık varmış."
+
+Büyükannesi gülümsemiş.
+
+"İşte şimdi anahtarın sırrını öğrenmişsin."
+
+O günden sonra Luna, köyündeki insanlara yardım etmeye daha çok önem vermiş.
+
+Üzgün olan arkadaşlarını dinlemiş, ihtiyacı olan komşularına destek olmuş ve küçük iyiliklerin ne kadar değerli olduğunu herkese anlatmış.
+
+Bazen geceleri penceresinden gökyüzünü izlerken yıldız şeklindeki kolyesini eline alırmış.
+
+Ay ışığı kolyenin üzerine düştüğünde Luna gülümsermiş.
+
+Çünkü bilirmiş ki gerçek büyü, gökyüzündeki yıldızlarda değil, insanların birbirine gösterdiği sevgi ve iyilikte saklıymış.
+
+Gökten üç yıldız düşmüş: Biri cesur olanlara, biri iyilik yapanlara, biri de bu masalı dinleyenlere. Onlar ermiş muradına, biz çıkalım kerevetine.`
+}
+
+        };
+
+        /* MASAL AÇMA */
+        function masalAc(secim) {
+
+            const secilenMasal = masallar[secim];
+
+            if (!secilenMasal) {
+                return;
+            }
+
+            document.getElementById("masalBasligi").textContent =
+                secilenMasal.baslik;
+
+            document.getElementById("masalMetni").textContent =
+                secilenMasal.metin;
+
+            document.getElementById("okumaAlani").style.display =
+                "block";
+
+            document.getElementById("okumaAlani").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        /* MASAL KAPATMA */
+        function masalKapat() {
+
+            document.getElementById("okumaAlani").style.display =
+                "none";
+
+            document.getElementById("masallar").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        /* FAVORİLERİ HAFIZADAN OKUMA */
+        let favoriler = [];
+
+        try {
+            const kayitliFavoriler = JSON.parse(
+                localStorage.getItem("masalFavorileri") || "[]"
+            );
+
+            if (Array.isArray(kayitliFavoriler)) {
+                favoriler = kayitliFavoriler;
+            }
+
+        } catch (hata) {
+            favoriler = [];
+        }
+
+        let sadeceFavoriler = false;
+
+        /* FAVORİ EKLEME VE ÇIKARMA */
+        function favoriDegistir(masalId) {
+
+            if (favoriler.includes(masalId)) {
+
+                favoriler = favoriler.filter(function(id) {
+                    return id !== masalId;
+                });
+
+            } else {
+
+                favoriler.push(masalId);
+            }
+
+            try {
+                localStorage.setItem(
+                    "masalFavorileri",
+                    JSON.stringify(favoriler)
+                );
+            } catch (hata) {
+                console.log("Favoriler kaydedilemedi.");
+            }
+
+            favoriButonlariniGuncelle();
+            masalAra();
+        }
+
+        /* FAVORİ BUTONLARINI GÜNCELLEME */
+        function favoriButonlariniGuncelle() {
+
+            const butonlar =
+                document.querySelectorAll(".favoriButonu");
+
+            butonlar.forEach(function(buton) {
+
+                const kart = buton.closest(".kart");
+                const masalId = kart.dataset.masal;
+
+                if (favoriler.includes(masalId)) {
+
+                    buton.textContent = "♥ Favorilerimde";
+                    buton.classList.add("aktif");
+
+                } else {
+
+                    buton.textContent = "♡ Favorilere Ekle";
+                    buton.classList.remove("aktif");
+                }
+            });
+        }
+
+        /* FAVORİ MASALLARI GÖSTERME */
+        function favorileriGoster() {
+
+            sadeceFavoriler = !sadeceFavoriler;
+
+            document.getElementById("favoriFiltreButonu").textContent =
+                sadeceFavoriler
+                    ? "✦ Tüm Masalları Göster"
+                    : "♡ Yalnızca Favorilerim";
+
+            masalAra();
+        }
+
+        /* MASAL ARAMA */
+        function masalAra() {
+
+            const arananKelime = document
+                .getElementById("masalAra")
+                .value
+                .toLocaleLowerCase("tr-TR");
+
+            const kartlar = document.querySelectorAll(".kart");
+
+            let gorunenMasalSayisi = 0;
+
+            kartlar.forEach(function(kart) {
+
+                const masalAdi = kart
+                    .querySelector("h2")
+                    .textContent
+                    .toLocaleLowerCase("tr-TR");
+
+                const isimUyuyor =
+                    masalAdi.includes(arananKelime);
+
+                const favoriUyuyor =
+                    !sadeceFavoriler ||
+                    favoriler.includes(kart.dataset.masal);
+
+                if (isimUyuyor && favoriUyuyor) {
+
+                    kart.style.display = "";
+                    gorunenMasalSayisi++;
+
+                } else {
+
+                    kart.style.display = "none";
+                }
+            });
+
+            const mesaj = document.getElementById("sonucMesaji");
+
+            if (gorunenMasalSayisi === 0) {
+
+                mesaj.style.display = "block";
+
+                mesaj.textContent = sadeceFavoriler
+                    ? "Aramana uygun favori masal bulunamadı."
+                    : "Bu aramaya uygun masal bulunamadı.";
+
+            } else {
+
+                mesaj.style.display = "none";
+            }
+        }
+
+        /* SAYFA AÇILDIĞINDA FAVORİLERİ GÜNCELLE */
+        favoriButonlariniGuncelle();
+
+    </script>
+
+</body>
+</html>

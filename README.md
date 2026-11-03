@@ -46,4 +46,4 @@ https://youtu.be/NXXDDQcXguQ
 
 ## Hazırlayan
 
-Ayşenur Naçar
+Ayşenur Naçar - 86220039

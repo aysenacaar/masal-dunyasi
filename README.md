@@ -42,7 +42,7 @@ https://aysenacaar.github.io/masal-dunyasi/
 
 ## Sunum Videosu
 
-YouTube sunum bağlantısı eklenecektir.
+](https://youtu.be/NXXDDQcXguQ)
 
 ## Hazırlayan
 

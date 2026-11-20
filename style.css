@@ -1,0 +1,398 @@
+        /* GENEL TASARIM */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #51405F;
+            background: linear-gradient(
+                180deg,
+                #FFF8EF 0%,
+                #FCE9F1 45%,
+                #F0E9FA 100%
+            );
+        }
+
+        /* ÜST MENÜ */
+        nav {
+            background: rgba(255, 250, 245, 0.95);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #EED9D5;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #655079;
+        }
+
+        .menu {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .menu a {
+            color: #655079;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            color: #E77D9D;
+        }
+
+        /* MASALSI BAŞLIK ALANI */
+        header {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 85px 20px 95px;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    #FFE5D7 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    #E5DDF9 0%,
+                    transparent 38%
+                ),
+                linear-gradient(
+                    135deg,
+                    #FFF4E8,
+                    #F9E3ED,
+                    #EDE5FA
+                );
+        }
+
+        .ustYazi {
+            color: #B77E91;
+            letter-spacing: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(46px, 8vw, 86px);
+            font-weight: normal;
+            color: #49375E;
+            margin: 18px 0;
+            text-shadow: 2px 3px 0 #FFFFFF;
+        }
+
+        .slogan {
+            font-size: 21px;
+            color: #806985;
+            font-style: italic;
+        }
+
+        .yildizlar {
+            font-size: 25px;
+            color: #C99C63;
+            letter-spacing: 16px;
+            margin-top: 30px;
+        }
+
+        .solSus {
+            position: absolute;
+            left: 6%;
+            bottom: 25px;
+            font-size: 85px;
+            opacity: 0.45;
+        }
+
+        .sagSus {
+            position: absolute;
+            right: 7%;
+            top: 45px;
+            font-size: 70px;
+            opacity: 0.45;
+        }
+
+        /* KOLEKSİYON BAŞLIĞI */
+        .bolumBasligi {
+            text-align: center;
+            padding: 45px 20px 0;
+        }
+
+        .bolumBasligi h2 {
+            font-size: 35px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .bolumBasligi p {
+            color: #8D7791;
+            font-size: 16px;
+        }
+
+        /* MASAL ARAMA KUTUSU */
+        .aramaAlani {
+            max-width: 500px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        #masalAra {
+            width: 100%;
+            padding: 16px 22px;
+            border: 1px solid #E8CBAA;
+            border-radius: 30px;
+            background: #FFFCF8;
+            color: #51405F;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(116, 77, 102, 0.08);
+        }
+
+        #masalAra:focus {
+            border-color: #E87598;
+        }
+
+        #masalAra::placeholder {
+            color: #A38FA3;
+        }
+
+        /* FAVORİ FİLTRESİ */
+        .favoriFiltre {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 15px auto 0;
+            padding: 0 20px;
+        }
+
+        #favoriFiltreButonu {
+            background: #E87598;
+            color: white;
+            font-size: 13px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            width: auto;
+        }
+
+        #favoriFiltreButonu:hover {
+            background: #D85E85;
+        }
+
+        /* MASAL KARTLARI */
+        .masallar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 30px;
+            max-width: 1050px;
+            margin: 30px auto 60px;
+            padding: 20px;
+        }
+
+        .kart {
+            background: rgba(255, 252, 247, 0.96);
+            border: 1px solid #E8CBAA;
+            border-radius: 25px;
+            padding: 14px 14px 28px;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(116, 77, 102, 0.10);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .kart:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 35px rgba(116, 77, 102, 0.17);
+        }
+
+        .masalGorseli {
+            display: block;
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+.kart h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #68496C;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    margin: 22px 0 10px;
+}
+
+
+
+        .kart p {
+            color: #806E83;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 0 15px;
+            min-height: 52px;
+        }
+
+        .kartYildiz {
+            color: #CBA46C;
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        /* BUTONLAR */
+        button {
+            background: #E87598;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 30px;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background: #D85E85;
+            transform: scale(1.04);
+        }
+
+        .kartButonlari {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .kartButonlari button {
+            width: 210px;
+            max-width: 100%;
+        }
+
+        /* FAVORİ BUTONLARI */
+        .favoriButonu {
+            background: #F7E4EE;
+            color: #A95379;
+            border: 1px solid #EAC5D7;
+            font-size: 14px;
+        }
+
+        .favoriButonu:hover {
+            background: #EFD0E0;
+        }
+
+        .favoriButonu.aktif {
+            background: #E87598;
+            color: white;
+        }
+
+        /* ARAMA SONUCU MESAJI */
+        #sonucMesaji {
+            display: none;
+            text-align: center;
+            color: #806E83;
+            font-size: 18px;
+            margin: 20px auto 45px;
+            padding: 0 20px;
+        }
+
+        /* MASAL OKUMA ALANI */
+        #okumaAlani {
+            display: none;
+            max-width: 850px;
+            margin: 20px auto 65px;
+            padding: 40px;
+            background: #FFFCF8;
+            border: 1px solid #E8CBAA;
+            border-radius: 25px;
+            box-shadow: 0 12px 28px rgba(116, 77, 102, 0.10);
+            text-align: center;
+        }
+
+        #okumaAlani h2 {
+            color: #49375E;
+            font-size: 34px;
+        }
+
+        #masalMetni {
+            font-size: 19px;
+            line-height: 1.9;
+            text-align: left;
+            white-space: pre-line;
+            margin: 30px 0;
+        }
+
+        /* HAKKIMIZDA */
+        .hakkimizda {
+            background: rgba(255, 252, 247, 0.7);
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        .hakkimizda h2 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+
+        .hakkimizda p {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+            color: #806E83;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #EBD9EB;
+            color: #6F5878;
+            font-size: 14px;
+        }
+
+        /* MOBİL UYUMLULUK */
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .menu {
+                gap: 16px;
+            }
+
+            header {
+                padding: 65px 15px;
+            }
+
+            .solSus,
+            .sagSus {
+                font-size: 40px;
+            }
+
+            .masallar {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .masalGorseli {
+                height: 240px;
+            }
+
+            #okumaAlani {
+                margin: 20px;
+                padding: 25px;
+            }
+        }
+   
+   
